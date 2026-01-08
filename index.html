@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Stack - AI-native Development Workflow</title>
+    <meta name="description" content="Stop losing context. Start stacking plans. AI-native development workflow that compounds knowledge over time.">
+    <meta property="og:title" content="Plan Stack - AI-native Development Workflow">
+    <meta property="og:description" content="Stop losing context. Start stacking plans. Research → Plan → Implement → Review.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://plan-stack.ai">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-tertiary: #1a1a1d;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #22c55e;
+            --accent-dim: #16a34a;
+            --border: #27272a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dim);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 120px 0 100px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent) 0%, #4ade80 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Flow Section */
+        .flow-section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 60px;
+            letter-spacing: -0.02em;
+        }
+
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .flow-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .flow-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            position: relative;
+        }
+
+        .flow-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-primary);
+            padding: 4px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .flow-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .flow-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .two-col {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+        }
+
+        .problem-list {
+            list-style: none;
+        }
+
+        .problem-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+
+        .problem-list .icon {
+            color: #ef4444;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .solution-list {
+            list-style: none;
+        }
+
+        .solution-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .solution-list li:last-child {
+            border-bottom: none;
+        }
+
+        .solution-list .icon {
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Code Block */
+        .code-section {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .code-block {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .code-header {
+            background: var(--bg-tertiary);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ef4444; }
+        .code-dot.yellow { background: #eab308; }
+        .code-dot.green { background: #22c55e; }
+
+        .code-content {
+            padding: 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            overflow-x: auto;
+        }
+
+        .code-content .comment {
+            color: var(--text-secondary);
+        }
+
+        .code-content .keyword {
+            color: var(--accent);
+        }
+
+        .code-content .string {
+            color: #f59e0b;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1, .hero-subtitle, .hero-cta, .hero-badge {
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        .hero-badge { animation-delay: 0s; }
+        .hero h1 { animation-delay: 0.1s; }
+        .hero-subtitle { animation-delay: 0.2s; }
+        .hero-cta { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <a href="/" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M4 6h16M4 12h16M4 18h10" stroke="#000"/>
+                </svg>
+            </div>
+            Plan Stack
+        </a>
+        <nav class="nav-links">
+            <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Docs</a>
+            <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge">AI-native Development Workflow</span>
+            <h1>
+                Stop losing context.<br>
+                <span class="gradient">Start stacking plans.</span>
+            </h1>
+            <p class="hero-subtitle">
+                A development methodology where implementation plans are accumulated, referenced, and reviewed—creating a self-reinforcing knowledge loop.
+            </p>
+            <div class="hero-cta">
+                <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
+                    Get Started
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="flow-section">
+        <div class="container">
+            <p class="section-label">The Workflow</p>
+            <h2 class="section-title">Research → Plan → Implement → Review</h2>
+            <div class="flow-grid">
+                <div class="flow-card" data-step="01">
+                    <h3>Research</h3>
+                    <p>AI checks docs/ for similar past implementations. Never start from zero.</p>
+                </div>
+                <div class="flow-card" data-step="02">
+                    <h3>Plan</h3>
+                    <p>AI generates implementation plan. Human reviews and approves before coding.</p>
+                </div>
+                <div class="flow-card" data-step="03">
+                    <h3>Implement</h3>
+                    <p>Code with the plan as guide. Intent is documented before execution.</p>
+                </div>
+                <div class="flow-card" data-step="04">
+                    <h3>Review</h3>
+                    <p>AI compares plan vs implementation, detecting drift between intent and code.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="problem-section">
+        <div class="container">
+            <div class="two-col">
+                <div>
+                    <p class="section-label">The Problem</p>
+                    <h2 class="section-title">Sound familiar?</h2>
+                    <ul class="problem-list">
+                        <li>
+                            <span class="icon">✕</span>
+                            <span>Documentation gets outdated or never written</span>
+                        </li>
+                        <li>
+                            <span class="icon">✕</span>
+                            <span>Knowledge is lost when team members leave</span>
+                        </li>
+                        <li>
+                            <span class="icon">✕</span>
+                            <span>AI coding assistants start from zero every time</span>
+                        </li>
+                        <li>
+                            <span class="icon">✕</span>
+                            <span>Code reviews lack context about original intent</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="section-label">The Solution</p>
+                    <h2 class="section-title">Plan Stack fixes this</h2>
+                    <ul class="solution-list">
+                        <li>
+                            <span class="icon">✓</span>
+                            <span>Plans cost nearly zero with AI—document everything</span>
+                        </li>
+                        <li>
+                            <span class="icon">✓</span>
+                            <span>Knowledge compounds in searchable markdown</span>
+                        </li>
+                        <li>
+                            <span class="icon">✓</span>
+                            <span>AI references past plans for consistency</span>
+                        </li>
+                        <li>
+                            <span class="icon">✓</span>
+                            <span>Intent is explicit before implementation</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="container">
+            <p class="section-label" style="text-align: center;">How it works</p>
+            <h2 class="section-title" style="text-align: center;">Plans become save points</h2>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                </div>
+                <div class="code-content">
+                    <span class="comment"># Your CLAUDE.md</span>
+
+                    <span class="keyword">Before implementing any feature:</span>
+                    1. Check docs/plans/ for similar past work
+                    2. Create plan in docs/plans/YYYYMMDD_name.md
+                    3. Get human approval before coding
+
+                    <span class="comment"># Context window full? No problem.</span>
+                    <span class="keyword">/clear</span>
+
+                    <span class="comment"># Restore context anytime:</span>
+                    <span class="string">"Read docs/plans/20250108_auth_refactor.md and continue"</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to stack plans?</h2>
+            <p>Join teams building knowledge that compounds with every commit.</p>
+            <div class="hero-cta">
+                <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
+                    Get Started
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    Star on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Created by <a href="https://x-and-hack.com">X-HACK Inc.</a> • MIT License</p>
+        <div class="footer-links">
+            <a href="https://github.com/planstack-ai/planstack">GitHub</a>
+            <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Documentation</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
