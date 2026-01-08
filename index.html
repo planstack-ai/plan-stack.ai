@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Stack - AI-native Development Workflow</title>
-    <meta name="description" content="You are losing context every time you use AI to code. Plan Stack solves this with implementation plans that compound knowledge over time.">
+    <meta name="description" content="You are losing context every time you use AI to code. The code exists. The tests exist. The reasoning does not.">
     <meta property="og:title" content="Plan Stack - Stop Losing Context">
-    <meta property="og:description" content="You are losing context every time you use AI to code. The code survives. The reasoning doesn't.">
+    <meta property="og:description" content="You are losing context every time you use AI to code. The code exists. The tests exist. The reasoning does not.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://plan-stack.ai">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -146,12 +146,36 @@
             margin-right: auto;
         }
 
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
+        .hero-list {
+            list-style: none;
             max-width: 600px;
-            margin: 0 auto 20px;
-            line-height: 1.7;
+            margin: 0 auto 32px;
+            text-align: left;
+        }
+
+        .hero-list li {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            padding: 8px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .hero-list .bullet {
+            color: var(--text-secondary);
+        }
+
+        .hero-punchline {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-punchline .fade {
+            color: var(--text-secondary);
         }
 
         .hero-emphasis {
@@ -270,17 +294,24 @@
             color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.7;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
-        .definition-box .flow {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
+        .definition-box ul {
+            list-style: none;
+            margin-bottom: 0;
+        }
+
+        .definition-box ul li {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            padding: 6px 0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .definition-box ul li .bullet {
             color: var(--accent);
-            background: var(--bg-tertiary);
-            padding: 12px 20px;
-            border-radius: 6px;
-            display: inline-block;
         }
 
         /* Comparison Cards */
@@ -359,16 +390,8 @@
             overflow-x: auto;
         }
 
-        .code-content .comment {
-            color: var(--text-secondary);
-        }
-
         .code-content .keyword {
             color: var(--accent);
-        }
-
-        .code-content .string {
-            color: #f59e0b;
         }
 
         /* Flow Grid */
@@ -491,14 +514,15 @@
             }
         }
 
-        .hero h1, .hero-subtitle, .hero-emphasis, .hero-cta {
+        .hero h1, .hero-list, .hero-punchline, .hero-emphasis, .hero-cta {
             animation: fadeUp 0.6s ease-out forwards;
         }
 
         .hero h1 { animation-delay: 0s; }
-        .hero-subtitle { animation-delay: 0.1s; }
-        .hero-emphasis { animation-delay: 0.2s; }
-        .hero-cta { animation-delay: 0.3s; }
+        .hero-list { animation-delay: 0.1s; }
+        .hero-punchline { animation-delay: 0.2s; }
+        .hero-emphasis { animation-delay: 0.3s; }
+        .hero-cta { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -529,8 +553,16 @@
     <section class="hero">
         <div class="container">
             <h1>You are losing context every time you use AI to code.</h1>
-            <p class="hero-subtitle">
-                Six months later: you don't remember why this was implemented this way. The AI confidently suggests breaking changes. Fixing a bug requires re-reading dozens of files.
+            <ul class="hero-list">
+                <li><span class="bullet">•</span> You don't remember <strong>why</strong> it was designed this way</li>
+                <li><span class="bullet">•</span> The AI confidently suggests changes that break invariants</li>
+                <li><span class="bullet">•</span> Fixing a bug requires re-reading dozens of files</li>
+                <li><span class="bullet">•</span> You hesitate to touch the code because the original intent is gone</li>
+            </ul>
+            <p class="hero-punchline">
+                <span class="fade">The code exists.</span><br>
+                <span class="fade">The tests exist.</span><br>
+                <strong>The reasoning does not.</strong>
             </p>
             <p class="hero-emphasis">
                 This is not a tooling problem. This is a context preservation problem.
@@ -553,20 +585,27 @@
     <section class="section">
         <div class="container">
             <p class="section-label">The Real Problem</p>
-            <h2 class="section-title">The code survives. The reasoning doesn't.</h2>
+            <h2 class="section-title">AI is bad at recovering original intent</h2>
             <p class="section-text">
-                Every feature you build with AI involves reading existing code to understand patterns, exploring approaches that don't work, and making dozens of micro-decisions.
+                AI coding assistants are extremely good at reading, writing, and refactoring code.
             </p>
             <p class="section-text">
-                When you're done, only the code remains. The <em>judgment</em> behind it vanishes.
+                They are extremely bad at one thing: <strong>recovering the original intent behind an implementation.</strong>
+            </p>
+            <p class="section-text" style="margin-top: 24px;">
+                That intent usually lives in:
             </p>
             <ul class="problem-bullets">
-                <li><span class="bullet">•</span> The AI starts from zero every time</li>
-                <li><span class="bullet">•</span> You re-investigate the same questions</li>
-                <li><span class="bullet">•</span> You risk breaking things the original implementation carefully avoided</li>
+                <li><span class="bullet">•</span> Temporary research</li>
+                <li><span class="bullet">•</span> Dead ends that were explored and rejected</li>
+                <li><span class="bullet">•</span> Trade-offs that were discussed but never written down</li>
+                <li><span class="bullet">•</span> Mental context that disappears after <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
             </ul>
             <p class="section-text" style="margin-top: 24px;">
-                <strong>This isn't because AI is bad. It's because nothing captures the research.</strong>
+                Once that context is gone, both humans and AI are forced to re-read large parts of the codebase, re-discover edge cases, and re-make the same decisions again.
+            </p>
+            <p class="section-text">
+                <strong>This cost repeats forever.</strong>
             </p>
         </div>
     </section>
@@ -575,31 +614,36 @@
     <section class="section">
         <div class="container">
             <p class="section-label">Why Existing Practices Fail</p>
-            <h2 class="section-title">The problem is structural, not motivational.</h2>
+            <h2 class="section-title">The problem is structural</h2>
             <table class="comparison-table">
                 <thead>
                     <tr>
                         <th>Approach</th>
-                        <th>Why It Fails</th>
+                        <th>Why it fails</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Documentation</td>
-                        <td>Written late, or never. Outdated within weeks.</td>
+                        <td>Written late, outdated quickly, or never read</td>
                     </tr>
                     <tr>
                         <td>Code comments</td>
-                        <td>Too local. Explains "what", not "why this approach".</td>
+                        <td>Too local — they explain <em>what</em>, not <em>why</em></td>
                     </tr>
                     <tr>
                         <td>Long AI sessions</td>
-                        <td>Context degrades before it overflows. Quality drops silently.</td>
+                        <td>Context degrades long before the token limit</td>
+                    </tr>
+                    <tr>
+                        <td>Code reviews</td>
+                        <td>Capture correctness, not original reasoning</td>
                     </tr>
                 </tbody>
             </table>
             <p class="section-text">
-                You can't document what you've already forgotten.
+                Implementation decisions are made <strong>before</strong> code exists,<br>
+                but most practices try to document them <strong>after</strong> the fact.
             </p>
         </div>
     </section>
@@ -608,12 +652,19 @@
     <section class="section">
         <div class="container">
             <div class="definition-box">
-                <p class="section-label" style="margin-bottom: 8px;">The Solution</p>
+                <p class="section-label" style="margin-bottom: 8px;">Introducing</p>
                 <h3>Plan Stack</h3>
                 <p>
-                    A development workflow where <strong>implementation plans are first-class artifacts</strong>—written before coding, reviewed by humans, and accumulated as long-term memory for both humans and AI.
+                    An AI-native development workflow that treats <strong>implementation plans as first-class artifacts</strong>.
                 </p>
-                <div class="flow">Research → Plan → Implement → Review → (repeat)</div>
+                <p>
+                    Instead of letting research and decisions disappear, they are captured in lightweight plans and accumulated over time.
+                </p>
+                <ul>
+                    <li><span class="bullet">•</span> Long-term memory for humans</li>
+                    <li><span class="bullet">•</span> External context for AI</li>
+                    <li><span class="bullet">•</span> A reliable starting point after <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
+                </ul>
             </div>
         </div>
     </section>
@@ -624,24 +675,24 @@
             <p class="section-label">Core Value</p>
             <h2 class="section-title">Plans are distilled research</h2>
             <p class="section-text">
-                Implementing a feature requires reading thousands of lines of code, exploring dead ends, and making dozens of micro-decisions.
+                Implementing a feature usually involves reading thousands of lines of code, exploring multiple approaches, hitting dead ends, and making dozens of small but important decisions.
             </p>
             <p class="section-text">
-                <strong>A plan captures all of this in 200-300 lines.</strong>
-            </p>
-            <p class="section-text">
-                Six months later, when a bug appears or requirements change, you (and Claude) get the benefit of that original research—without re-consuming the original context.
+                A good plan captures all of that in <strong>200–300 lines</strong>.
             </p>
             <div class="comparison-cards">
                 <div class="comparison-card negative">
                     <div class="card-title">Without a plan</div>
-                    <div class="card-text">Re-read 50 files, re-discover edge cases, re-make decisions.</div>
+                    <div class="card-text">Re-read 50 files. Re-discover everything. Re-make decisions.</div>
                 </div>
                 <div class="comparison-card positive">
                     <div class="card-title">With a plan</div>
-                    <div class="card-text">Read 300 lines, understand intent, modify with confidence.</div>
+                    <div class="card-text">Read one file. Understand intent. Modify with confidence.</div>
                 </div>
             </div>
+            <p class="section-text">
+                Plans compress large, expensive context into something both humans and AI can reliably consume.
+            </p>
         </div>
     </section>
 
@@ -651,24 +702,22 @@
             <p class="section-label">Technical Reality</p>
             <h2 class="section-title">Context degrades before it overflows</h2>
             <p class="section-text">
-                200K tokens sounds huge, but complex tasks fill it fast. As context fills, Claude gradually forgets earlier instructions and becomes repetitive.
+                200K tokens sounds huge. In practice: large codebases fill it quickly, earlier instructions fade, and the AI becomes repetitive or loses constraints.
             </p>
             <p class="section-text">
-                <strong>The problem isn't hitting the limit—it's degradation well before the limit.</strong>
+                The real problem isn't hitting the limit — it's <strong>losing fidelity long before you do</strong>.
             </p>
-            <p class="section-text" style="margin-top: 32px; margin-bottom: 8px;">
-                <strong>The fix:</strong>
+            <p class="section-text" style="margin-top: 24px;">
+                Plan Stack embraces this reality instead of fighting it:
             </p>
             <ul class="problem-bullets" style="margin-bottom: 24px;">
-                <li><span class="bullet">1.</span> Research until you have a clear approach</li>
-                <li><span class="bullet">2.</span> Save plan to file</li>
-                <li><span class="bullet">3.</span> <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
-                <li><span class="bullet">4.</span> "Read docs/plans/xxx.md and implement"</li>
+                <li><span class="bullet">1.</span> Research until the approach is clear</li>
+                <li><span class="bullet">2.</span> Write the plan</li>
+                <li><span class="bullet">3.</span> Clear the context</li>
+                <li><span class="bullet">4.</span> Resume from the plan</li>
             </ul>
             <p class="section-text">
-                You restart at 0% with all knowledge preserved.<br>
-                Without a plan, <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code> means starting over.<br>
-                <strong>With a plan, it's a fresh start with full context.</strong>
+                <strong>You restart at 0% context — without starting over.</strong>
             </p>
         </div>
     </section>
