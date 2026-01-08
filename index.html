@@ -215,6 +215,21 @@
             }
         }
 
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 900px) {
+            .workflow-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+        }
+
         .flow-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -581,6 +596,110 @@
                     </ul>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="example-section" style="padding: 100px 0; border-top: 1px solid var(--border);">
+        <div class="container">
+            <p class="section-label" style="text-align: center;">Real Example</p>
+            <h2 class="section-title" style="text-align: center;">What a plan actually looks like</h2>
+            <div class="code-block" style="max-width: 800px; margin: 0 auto;">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span style="margin-left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);">docs/plans/20250108_auth_refactor.md</span>
+                </div>
+                <div class="code-content" style="font-size: 0.85rem; line-height: 1.7;">
+<span class="comment"># Auth Refactor: JWT to Session-based</span>
+
+<span class="keyword">## Background</span>
+Current JWT implementation causes token refresh issues on mobile.
+Related: <span class="string">docs/plans/20241015_jwt_implementation.md</span>
+
+<span class="keyword">## Approach</span>
+1. Add session store (Redis)
+2. Create session middleware
+3. Migrate endpoints incrementally
+4. Keep JWT for API clients (backward compat)
+
+<span class="keyword">## Files to Change</span>
+- <span class="string">src/auth/middleware.ts</span> - Add session check
+- <span class="string">src/auth/session.ts</span> - New file
+- <span class="string">src/config/redis.ts</span> - Connection setup
+
+<span class="keyword">## Risks</span>
+- Redis single point of failure → Use Redis Cluster
+- Session fixation → Regenerate ID on login
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); margin-top: 24px; font-size: 0.95rem;">
+                Plans reference past decisions, document risks, and serve as PR descriptions.
+            </p>
+        </div>
+    </section>
+
+    <section class="workflow-section" style="padding: 100px 0; border-top: 1px solid var(--border);">
+        <div class="container">
+            <p class="section-label" style="text-align: center;">Workflow in Action</p>
+            <h2 class="section-title" style="text-align: center;">From plan to production</h2>
+            <div class="workflow-grid">
+                <!-- Step 1: Plan -->
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+                    <div style="background: var(--bg-tertiary); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
+                        <span style="background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">1</span>
+                        <span style="font-size: 0.85rem; font-weight: 600;">Plan</span>
+                    </div>
+                    <div style="padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6;">
+                        <div style="color: var(--accent);">$ claude</div>
+                        <div style="margin-top: 8px;">User: Add password reset feature</div>
+                        <div style="margin-top: 8px; color: var(--text-primary);">Claude: I'll check existing auth plans first...</div>
+                        <div style="margin-top: 4px; color: var(--text-primary);">Found: 20241015_jwt_implementation.md</div>
+                        <div style="margin-top: 8px; color: var(--text-primary);">Creating plan: 20250108_password_reset.md</div>
+                        <div style="margin-top: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 4px; border-left: 2px solid var(--accent);">
+                            Plan ready for review ✓
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 2: Implement -->
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+                    <div style="background: var(--bg-tertiary); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #f59e0b; color: #000; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">2</span>
+                        <span style="font-size: 0.85rem; font-weight: 600;">Implement</span>
+                    </div>
+                    <div style="padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6;">
+                        <div style="color: var(--accent);">$ claude</div>
+                        <div style="margin-top: 8px;">User: Plan approved. Implement it.</div>
+                        <div style="margin-top: 8px; color: var(--text-primary);">Claude: Following the plan...</div>
+                        <div style="margin-top: 4px; color: var(--text-secondary);">✓ Created src/auth/reset.ts</div>
+                        <div style="color: var(--text-secondary);">✓ Updated src/routes/auth.ts</div>
+                        <div style="color: var(--text-secondary);">✓ Added migration</div>
+                        <div style="margin-top: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 4px; border-left: 2px solid #f59e0b;">
+                            Ready for PR ✓
+                        </div>
+                    </div>
+                </div>
+                <!-- Step 3: Review -->
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
+                    <div style="background: var(--bg-tertiary); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
+                        <span style="background: #3b82f6; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">3</span>
+                        <span style="font-size: 0.85rem; font-weight: 600;">Review</span>
+                    </div>
+                    <div style="padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6;">
+                        <div style="color: #3b82f6;">GitHub Actions</div>
+                        <div style="margin-top: 8px; color: var(--text-primary);">Comparing plan vs implementation...</div>
+                        <div style="margin-top: 8px; color: var(--text-secondary);">✓ All planned files created</div>
+                        <div style="color: var(--text-secondary);">✓ No unexpected changes</div>
+                        <div style="color: #f59e0b;">⚠ Missing: rate limiting (noted in plan)</div>
+                        <div style="margin-top: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 4px; border-left: 2px solid #3b82f6;">
+                            Review comment posted ✓
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); margin-top: 32px; font-size: 0.95rem;">
+                AI-generated reviews catch drift between intent and implementation.
+            </p>
         </div>
     </section>
 
