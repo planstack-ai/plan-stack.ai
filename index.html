@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plan Stack - AI-native Development Workflow</title>
-    <meta name="description" content="Stop losing context. Start stacking plans. AI-native development workflow that compounds knowledge over time.">
-    <meta property="og:title" content="Plan Stack - AI-native Development Workflow">
-    <meta property="og:description" content="Stop losing context. Start stacking plans. Research → Plan → Implement → Review.">
+    <meta name="description" content="You are losing context every time you use AI to code. Plan Stack solves this with implementation plans that compound knowledge over time.">
+    <meta property="og:title" content="Plan Stack - Stop Losing Context">
+    <meta property="og:description" content="You are losing context every time you use AI to code. The code survives. The reasoning doesn't.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://plan-stack.ai">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,37 +135,30 @@
             text-align: center;
         }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
         .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 24px;
+            line-height: 1.2;
+            margin-bottom: 32px;
             letter-spacing: -0.02em;
-        }
-
-        .hero h1 .gradient {
-            background: linear-gradient(135deg, var(--accent) 0%, #4ade80 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin: 0 auto 20px;
+            line-height: 1.7;
+        }
+
+        .hero-emphasis {
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 40px;
         }
 
         .hero-cta {
@@ -175,8 +168,8 @@
             flex-wrap: wrap;
         }
 
-        /* Flow Section */
-        .flow-section {
+        /* Sections */
+        .section {
             padding: 100px 0;
             border-top: 1px solid var(--border);
         }
@@ -193,154 +186,150 @@
         .section-title {
             font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: 60px;
+            margin-bottom: 32px;
             letter-spacing: -0.02em;
         }
 
-        .flow-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+        .section-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 800px;
+            line-height: 1.7;
+            margin-bottom: 16px;
         }
 
-        @media (max-width: 900px) {
-            .flow-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        .section-text strong {
+            color: var(--text-primary);
         }
 
-        @media (max-width: 500px) {
-            .flow-grid {
-                grid-template-columns: 1fr;
-            }
+        /* Problem List */
+        .problem-bullets {
+            list-style: none;
+            max-width: 700px;
         }
 
-        .workflow-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
+        .problem-bullets li {
+            padding: 12px 0;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
         }
 
-        @media (max-width: 900px) {
-            .workflow-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-            }
+        .problem-bullets .bullet {
+            color: var(--text-secondary);
+            flex-shrink: 0;
         }
 
-        .flow-card {
+        /* Table */
+        .comparison-table {
+            width: 100%;
+            max-width: 700px;
+            border-collapse: collapse;
+            margin: 32px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .comparison-table td:first-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .comparison-table td:last-child {
+            color: var(--text-secondary);
+        }
+
+        /* Definition Box */
+        .definition-box {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 28px;
-            position: relative;
+            padding: 40px;
+            max-width: 800px;
         }
 
-        .flow-card::before {
-            content: attr(data-step);
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--bg-primary);
-            padding: 4px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            border: 1px solid var(--border);
-            border-radius: 4px;
+        .definition-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
         }
 
-        .flow-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .flow-card p {
-            font-size: 0.9rem;
+        .definition-box p {
             color: var(--text-secondary);
-            line-height: 1.5;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
 
-        /* Problem Section */
-        .problem-section {
-            padding: 100px 0;
-            border-top: 1px solid var(--border);
+        .definition-box .flow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--accent);
+            background: var(--bg-tertiary);
+            padding: 12px 20px;
+            border-radius: 6px;
+            display: inline-block;
         }
 
-        .two-col {
+        /* Comparison Cards */
+        .comparison-cards {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: start;
+            gap: 24px;
+            max-width: 700px;
+            margin: 32px 0;
         }
 
-        @media (max-width: 768px) {
-            .two-col {
+        @media (max-width: 600px) {
+            .comparison-cards {
                 grid-template-columns: 1fr;
-                gap: 48px;
             }
         }
 
-        .problem-list {
-            list-style: none;
+        .comparison-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
         }
 
-        .problem-list li {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .problem-list li:last-child {
-            border-bottom: none;
-        }
-
-        .problem-list .icon {
+        .comparison-card.negative .card-title {
             color: #ef4444;
-            flex-shrink: 0;
-            margin-top: 2px;
         }
 
-        .solution-list {
-            list-style: none;
-        }
-
-        .solution-list li {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .solution-list li:last-child {
-            border-bottom: none;
-        }
-
-        .solution-list .icon {
+        .comparison-card.positive .card-title {
             color: var(--accent);
-            flex-shrink: 0;
-            margin-top: 2px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         /* Code Block */
-        .code-section {
-            padding: 100px 0;
-            border-top: 1px solid var(--border);
-        }
-
         .code-block {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 12px;
             overflow: hidden;
             max-width: 700px;
-            margin: 0 auto;
         }
 
         .code-header {
@@ -380,6 +369,59 @@
 
         .code-content .string {
             color: #f59e0b;
+        }
+
+        /* Flow Grid */
+        .flow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .flow-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .flow-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            position: relative;
+        }
+
+        .flow-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-primary);
+            padding: 4px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .flow-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .flow-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
         }
 
         /* CTA Section */
@@ -449,13 +491,13 @@
             }
         }
 
-        .hero h1, .hero-subtitle, .hero-cta, .hero-badge {
+        .hero h1, .hero-subtitle, .hero-emphasis, .hero-cta {
             animation: fadeUp 0.6s ease-out forwards;
         }
 
-        .hero-badge { animation-delay: 0s; }
-        .hero h1 { animation-delay: 0.1s; }
-        .hero-subtitle { animation-delay: 0.2s; }
+        .hero h1 { animation-delay: 0s; }
+        .hero-subtitle { animation-delay: 0.1s; }
+        .hero-emphasis { animation-delay: 0.2s; }
         .hero-cta { animation-delay: 0.3s; }
     </style>
 </head>
@@ -483,15 +525,15 @@
 </header>
 
 <main>
+    <!-- 1. Pain (Hero) -->
     <section class="hero">
         <div class="container">
-            <span class="hero-badge">AI-native Development Workflow</span>
-            <h1>
-                Stop losing context.<br>
-                <span class="gradient">Start stacking plans.</span>
-            </h1>
+            <h1>You are losing context every time you use AI to code.</h1>
             <p class="hero-subtitle">
-                A development methodology where implementation plans are accumulated, referenced, and reviewed—creating a self-reinforcing knowledge loop.
+                Six months later: you don't remember why this was implemented this way. The AI confidently suggests breaking changes. Fixing a bug requires re-reading dozens of files.
+            </p>
+            <p class="hero-emphasis">
+                This is not a tooling problem. This is a context preservation problem.
             </p>
             <div class="hero-cta">
                 <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
@@ -507,7 +549,166 @@
         </div>
     </section>
 
-    <section class="flow-section">
+    <!-- 2. The Real Problem -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">The Real Problem</p>
+            <h2 class="section-title">The code survives. The reasoning doesn't.</h2>
+            <p class="section-text">
+                Every feature you build with AI involves reading existing code to understand patterns, exploring approaches that don't work, and making dozens of micro-decisions.
+            </p>
+            <p class="section-text">
+                When you're done, only the code remains. The <em>judgment</em> behind it vanishes.
+            </p>
+            <ul class="problem-bullets">
+                <li><span class="bullet">•</span> The AI starts from zero every time</li>
+                <li><span class="bullet">•</span> You re-investigate the same questions</li>
+                <li><span class="bullet">•</span> You risk breaking things the original implementation carefully avoided</li>
+            </ul>
+            <p class="section-text" style="margin-top: 24px;">
+                <strong>This isn't because AI is bad. It's because nothing captures the research.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- 3. Why Existing Practices Fail -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">Why Existing Practices Fail</p>
+            <h2 class="section-title">The problem is structural, not motivational.</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Approach</th>
+                        <th>Why It Fails</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Documentation</td>
+                        <td>Written late, or never. Outdated within weeks.</td>
+                    </tr>
+                    <tr>
+                        <td>Code comments</td>
+                        <td>Too local. Explains "what", not "why this approach".</td>
+                    </tr>
+                    <tr>
+                        <td>Long AI sessions</td>
+                        <td>Context degrades before it overflows. Quality drops silently.</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="section-text">
+                You can't document what you've already forgotten.
+            </p>
+        </div>
+    </section>
+
+    <!-- 4. Plan Stack (Name) -->
+    <section class="section">
+        <div class="container">
+            <div class="definition-box">
+                <p class="section-label" style="margin-bottom: 8px;">The Solution</p>
+                <h3>Plan Stack</h3>
+                <p>
+                    A development workflow where <strong>implementation plans are first-class artifacts</strong>—written before coding, reviewed by humans, and accumulated as long-term memory for both humans and AI.
+                </p>
+                <div class="flow">Research → Plan → Implement → Review → (repeat)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Plans are Distilled Research -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">Core Value</p>
+            <h2 class="section-title">Plans are distilled research</h2>
+            <p class="section-text">
+                Implementing a feature requires reading thousands of lines of code, exploring dead ends, and making dozens of micro-decisions.
+            </p>
+            <p class="section-text">
+                <strong>A plan captures all of this in 200-300 lines.</strong>
+            </p>
+            <p class="section-text">
+                Six months later, when a bug appears or requirements change, you (and Claude) get the benefit of that original research—without re-consuming the original context.
+            </p>
+            <div class="comparison-cards">
+                <div class="comparison-card negative">
+                    <div class="card-title">Without a plan</div>
+                    <div class="card-text">Re-read 50 files, re-discover edge cases, re-make decisions.</div>
+                </div>
+                <div class="comparison-card positive">
+                    <div class="card-title">With a plan</div>
+                    <div class="card-text">Read 300 lines, understand intent, modify with confidence.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Context Degradation -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">Technical Reality</p>
+            <h2 class="section-title">Context degrades before it overflows</h2>
+            <p class="section-text">
+                200K tokens sounds huge, but complex tasks fill it fast. As context fills, Claude gradually forgets earlier instructions and becomes repetitive.
+            </p>
+            <p class="section-text">
+                <strong>The problem isn't hitting the limit—it's degradation well before the limit.</strong>
+            </p>
+            <p class="section-text" style="margin-top: 32px; margin-bottom: 8px;">
+                <strong>The fix:</strong>
+            </p>
+            <ul class="problem-bullets" style="margin-bottom: 24px;">
+                <li><span class="bullet">1.</span> Research until you have a clear approach</li>
+                <li><span class="bullet">2.</span> Save plan to file</li>
+                <li><span class="bullet">3.</span> <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
+                <li><span class="bullet">4.</span> "Read docs/plans/xxx.md and implement"</li>
+            </ul>
+            <p class="section-text">
+                You restart at 0% with all knowledge preserved.<br>
+                Without a plan, <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code> means starting over.<br>
+                <strong>With a plan, it's a fresh start with full context.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- 7. The One Rule -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">Get Started</p>
+            <h2 class="section-title">The one rule that makes everything work</h2>
+            <p class="section-text" style="margin-bottom: 24px;">
+                Add this line to your <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">CLAUDE.md</code>:
+            </p>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span style="margin-left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);">CLAUDE.md</span>
+                </div>
+                <div class="code-content">
+<span class="keyword">Search docs/plans/ for similar past implementations before planning.</span>
+                </div>
+            </div>
+            <p class="section-text" style="margin-top: 24px;">
+                This single line creates the self-reinforcing loop:
+            </p>
+            <ul class="problem-bullets">
+                <li><span class="bullet">•</span> Claude checks <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">docs/</code> first</li>
+                <li><span class="bullet">•</span> Finds distilled context (hundreds of tokens)</li>
+                <li><span class="bullet">•</span> Skips reading raw code (tens of thousands of tokens)</li>
+            </ul>
+            <p class="section-text" style="margin-top: 24px;">
+                Without it, Claude starts from raw code every time.<br>
+                <strong>With it, Claude leverages accumulated knowledge automatically.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- 8. The Workflow -->
+    <section class="section">
         <div class="container">
             <p class="section-label">The Workflow</p>
             <h2 class="section-title">Research → Plan → Implement → Review</h2>
@@ -532,228 +733,11 @@
         </div>
     </section>
 
-    <section class="problem-section">
-        <div class="container">
-            <p class="section-label">Why Now?</p>
-            <h2 class="section-title">Claude Opus-level reasoning makes plans practical</h2>
-            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin-bottom: 16px; line-height: 1.7;">
-                Previous AI assistants could generate text, but not reliable implementation plans. They lacked the ability to investigate codebases thoroughly, understand architectural context, and produce plans worth reviewing.
-            </p>
-            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 800px; margin-bottom: 16px; line-height: 1.7;">
-                With Claude Code, the AI can research your codebase, reference past decisions, and generate plans that humans actually want to approve. The bottleneck shifts from "writing documentation" to "reviewing it."
-            </p>
-            <p style="color: var(--text-primary); font-size: 1.1rem; max-width: 800px; font-weight: 600;">
-                The reason not to document has disappeared.
-            </p>
-        </div>
-    </section>
-
-    <section class="problem-section">
-        <div class="container">
-            <div class="two-col">
-                <div>
-                    <p class="section-label">The Problem</p>
-                    <h2 class="section-title">Sound familiar?</h2>
-                    <ul class="problem-list">
-                        <li>
-                            <span class="icon">✕</span>
-                            <span>Documentation gets outdated or never written</span>
-                        </li>
-                        <li>
-                            <span class="icon">✕</span>
-                            <span>Knowledge is lost when team members leave</span>
-                        </li>
-                        <li>
-                            <span class="icon">✕</span>
-                            <span>AI coding assistants start from zero every time</span>
-                        </li>
-                        <li>
-                            <span class="icon">✕</span>
-                            <span>Code reviews lack context about original intent</span>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <p class="section-label">The Solution</p>
-                    <h2 class="section-title">Plan Stack fixes this</h2>
-                    <ul class="solution-list">
-                        <li>
-                            <span class="icon">✓</span>
-                            <span>Plans cost nearly zero with AI—document everything</span>
-                        </li>
-                        <li>
-                            <span class="icon">✓</span>
-                            <span>Knowledge compounds in searchable markdown</span>
-                        </li>
-                        <li>
-                            <span class="icon">✓</span>
-                            <span>AI references past plans for consistency</span>
-                        </li>
-                        <li>
-                            <span class="icon">✓</span>
-                            <span>Intent is explicit before implementation</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="example-section" style="padding: 100px 0; border-top: 1px solid var(--border);">
-        <div class="container">
-            <p class="section-label" style="text-align: center;">Real Example</p>
-            <h2 class="section-title" style="text-align: center;">What a plan actually looks like</h2>
-            <div class="code-block" style="max-width: 800px; margin: 0 auto;">
-                <div class="code-header">
-                    <span class="code-dot red"></span>
-                    <span class="code-dot yellow"></span>
-                    <span class="code-dot green"></span>
-                    <span style="margin-left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);">docs/plans/20250108_auth_refactor.md</span>
-                </div>
-                <div class="code-content" style="font-size: 0.85rem; line-height: 1.7;">
-<span class="comment"># Auth Refactor: JWT to Session-based</span>
-
-<span class="keyword">## Background</span>
-Current JWT implementation causes token refresh issues on mobile.
-Related: <span class="string">docs/plans/20241015_jwt_implementation.md</span>
-
-<span class="keyword">## Approach</span>
-1. Add session store (Redis)
-2. Create session middleware
-3. Migrate endpoints incrementally
-4. Keep JWT for API clients (backward compat)
-
-<span class="keyword">## Files to Change</span>
-- <span class="string">src/auth/middleware.ts</span> - Add session check
-- <span class="string">src/auth/session.ts</span> - New file
-- <span class="string">src/config/redis.ts</span> - Connection setup
-
-<span class="keyword">## Risks</span>
-- Redis single point of failure → Use Redis Cluster
-- Session fixation → Regenerate ID on login
-                </div>
-            </div>
-            <p style="text-align: center; color: var(--text-secondary); margin-top: 24px; font-size: 0.95rem;">
-                Plans reference past decisions, document risks, and serve as PR descriptions.
-            </p>
-        </div>
-    </section>
-
-    <section class="workflow-section" style="padding: 100px 0; border-top: 1px solid var(--border);">
-        <div class="container">
-            <p class="section-label" style="text-align: center;">Workflow in Action</p>
-            <h2 class="section-title" style="text-align: center;">From plan to production</h2>
-            <div class="workflow-grid">
-                <!-- Step 1: Plan -->
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
-                    <div style="background: var(--bg-tertiary); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
-                        <span style="background: var(--accent); color: #000; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">1</span>
-                        <span style="font-size: 0.85rem; font-weight: 600;">Plan</span>
-                    </div>
-                    <div style="padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6;">
-                        <div style="color: var(--accent);">$ claude</div>
-                        <div style="margin-top: 8px;">User: Add password reset feature</div>
-                        <div style="margin-top: 8px; color: var(--text-primary);">Claude: I'll check existing auth plans first...</div>
-                        <div style="margin-top: 4px; color: var(--text-primary);">Found: 20241015_jwt_implementation.md</div>
-                        <div style="margin-top: 8px; color: var(--text-primary);">Creating plan: 20250108_password_reset.md</div>
-                        <div style="margin-top: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 4px; border-left: 2px solid var(--accent);">
-                            Plan ready for review ✓
-                        </div>
-                    </div>
-                </div>
-                <!-- Step 2: Implement -->
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
-                    <div style="background: var(--bg-tertiary); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
-                        <span style="background: #f59e0b; color: #000; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">2</span>
-                        <span style="font-size: 0.85rem; font-weight: 600;">Implement</span>
-                    </div>
-                    <div style="padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6;">
-                        <div style="color: var(--accent);">$ claude</div>
-                        <div style="margin-top: 8px;">User: Plan approved. Implement it.</div>
-                        <div style="margin-top: 8px; color: var(--text-primary);">Claude: Following the plan...</div>
-                        <div style="margin-top: 4px; color: var(--text-secondary);">✓ Created src/auth/reset.ts</div>
-                        <div style="color: var(--text-secondary);">✓ Updated src/routes/auth.ts</div>
-                        <div style="color: var(--text-secondary);">✓ Added migration</div>
-                        <div style="margin-top: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 4px; border-left: 2px solid #f59e0b;">
-                            Ready for PR ✓
-                        </div>
-                    </div>
-                </div>
-                <!-- Step 3: Review -->
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;">
-                    <div style="background: var(--bg-tertiary); padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px;">
-                        <span style="background: #3b82f6; color: #fff; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;">3</span>
-                        <span style="font-size: 0.85rem; font-weight: 600;">Review</span>
-                    </div>
-                    <div style="padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-secondary); line-height: 1.6;">
-                        <div style="color: #3b82f6;">GitHub Actions</div>
-                        <div style="margin-top: 8px; color: var(--text-primary);">Comparing plan vs implementation...</div>
-                        <div style="margin-top: 8px; color: var(--text-secondary);">✓ All planned files created</div>
-                        <div style="color: var(--text-secondary);">✓ No unexpected changes</div>
-                        <div style="color: #f59e0b;">⚠ Missing: rate limiting (noted in plan)</div>
-                        <div style="margin-top: 8px; padding: 8px; background: var(--bg-tertiary); border-radius: 4px; border-left: 2px solid #3b82f6;">
-                            Review comment posted ✓
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <p style="text-align: center; color: var(--text-secondary); margin-top: 32px; font-size: 0.95rem;">
-                AI-generated reviews catch drift between intent and implementation.
-            </p>
-        </div>
-    </section>
-
-    <section class="code-section">
-        <div class="container">
-            <p class="section-label" style="text-align: center;">Why It Works</p>
-            <h2 class="section-title" style="text-align: center;">Plans are distilled research</h2>
-            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto 24px; text-align: center; line-height: 1.7;">
-                Implementing a feature means reading thousands of lines, exploring dead ends, and making dozens of micro-decisions. A plan captures all of this in 200-300 lines.
-            </p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 700px; margin: 0 auto 48px;">
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                    <div style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Without a plan</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Re-read 50 files, re-discover edge cases, re-make decisions.</div>
-                </div>
-                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
-                    <div style="color: var(--accent); font-weight: 600; margin-bottom: 8px;">With a plan</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Read 300 lines, understand intent, modify with confidence.</div>
-                </div>
-            </div>
-            <p style="color: var(--text-secondary); font-size: 1rem; max-width: 700px; margin: 0 auto 16px; text-align: center; line-height: 1.7;">
-                As context fills, Claude gradually forgets instructions and becomes repetitive. The problem isn't hitting the limit—it's degradation <em>before</em> the limit.
-            </p>
-            <p style="color: var(--text-primary); font-size: 1rem; max-width: 700px; margin: 0 auto 48px; text-align: center; font-weight: 600;">
-                /clear + plan = fresh start with full context.
-            </p>
-            <div class="code-block">
-                <div class="code-header">
-                    <span class="code-dot red"></span>
-                    <span class="code-dot yellow"></span>
-                    <span class="code-dot green"></span>
-                </div>
-                <div class="code-content">
-                    <span class="comment"># Your CLAUDE.md</span>
-
-                    <span class="keyword">Before implementing any feature:</span>
-                    1. Check docs/plans/ for similar past work
-                    2. Create plan in docs/plans/YYYYMMDD_name.md
-                    3. Get human approval before coding
-
-                    <span class="comment"># Context window full? No problem.</span>
-                    <span class="keyword">/clear</span>
-
-                    <span class="comment"># Restore context anytime:</span>
-                    <span class="string">"Read docs/plans/20250108_auth_refactor.md and continue"</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- CTA -->
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to stack plans?</h2>
-            <p>Join teams building knowledge that compounds with every commit.</p>
+            <h2>Ready to stop losing context?</h2>
+            <p>Start stacking plans. Knowledge compounds with every commit.</p>
             <div class="hero-cta">
                 <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
                     Get Started
