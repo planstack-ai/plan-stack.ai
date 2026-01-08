@@ -705,8 +705,27 @@ Related: <span class="string">docs/plans/20241015_jwt_implementation.md</span>
 
     <section class="code-section">
         <div class="container">
-            <p class="section-label" style="text-align: center;">How it works</p>
-            <h2 class="section-title" style="text-align: center;">Plans become save points</h2>
+            <p class="section-label" style="text-align: center;">Why It Works</p>
+            <h2 class="section-title" style="text-align: center;">Plans are distilled research</h2>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; max-width: 700px; margin: 0 auto 24px; text-align: center; line-height: 1.7;">
+                Implementing a feature means reading thousands of lines, exploring dead ends, and making dozens of micro-decisions. A plan captures all of this in 200-300 lines.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 700px; margin: 0 auto 48px;">
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <div style="color: #ef4444; font-weight: 600; margin-bottom: 8px;">Without a plan</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Re-read 50 files, re-discover edge cases, re-make decisions.</div>
+                </div>
+                <div style="background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+                    <div style="color: var(--accent); font-weight: 600; margin-bottom: 8px;">With a plan</div>
+                    <div style="color: var(--text-secondary); font-size: 0.9rem;">Read 300 lines, understand intent, modify with confidence.</div>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 1rem; max-width: 700px; margin: 0 auto 16px; text-align: center; line-height: 1.7;">
+                As context fills, Claude gradually forgets instructions and becomes repetitive. The problem isn't hitting the limit—it's degradation <em>before</em> the limit.
+            </p>
+            <p style="color: var(--text-primary); font-size: 1rem; max-width: 700px; margin: 0 auto 48px; text-align: center; font-weight: 600;">
+                /clear + plan = fresh start with full context.
+            </p>
             <div class="code-block">
                 <div class="code-header">
                     <span class="code-dot red"></span>
