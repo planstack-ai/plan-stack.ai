@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan Stack - AI-native Development Workflow</title>
-    <meta name="description" content="You are losing context every time you use AI to code. The code exists. The tests exist. The reasoning does not.">
-    <meta property="og:title" content="Plan Stack - Stop Losing Context">
-    <meta property="og:description" content="You are losing context every time you use AI to code. The code exists. The tests exist. The reasoning does not.">
+    <title>Plan Stack - Context Engineering for AI-Assisted Development</title>
+    <meta name="description" content="The 2M Token Trap: Why bigger context windows don't mean better AI. Plan Stack brings context engineering to AI-assisted development.">
+    <meta property="og:title" content="Plan Stack - Context Engineering for AI-Assisted Development">
+    <meta property="og:description" content="The 2M Token Trap: Why bigger context windows don't mean better AI. Plan Stack brings context engineering to AI-assisted development.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://plan-stack.ai">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,6 +22,7 @@
             --accent: #22c55e;
             --accent-dim: #16a34a;
             --border: #27272a;
+            --warning: #f59e0b;
         }
 
         * {
@@ -135,53 +136,37 @@
             text-align: center;
         }
 
+        .hero-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 4px;
+        }
+
         .hero h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
             line-height: 1.2;
-            margin-bottom: 32px;
+            margin-bottom: 24px;
             letter-spacing: -0.02em;
             max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .hero-list {
-            list-style: none;
-            max-width: 600px;
-            margin: 0 auto 32px;
-            text-align: left;
-        }
-
-        .hero-list li {
+        .hero-subtitle {
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            font-size: 1.1rem;
-            padding: 8px 0;
-            display: flex;
-            gap: 12px;
-        }
-
-        .hero-list .bullet {
-            color: var(--text-secondary);
-        }
-
-        .hero-punchline {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 16px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-punchline .fade {
-            color: var(--text-secondary);
-        }
-
-        .hero-persona {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
         }
 
         .hero-cta {
@@ -225,83 +210,138 @@
             color: var(--text-primary);
         }
 
-        /* Problem List */
-        .problem-bullets {
-            list-style: none;
-            max-width: 700px;
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 48px 0;
         }
 
-        .problem-bullets li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .problem-bullets .bullet {
-            color: var(--text-secondary);
-            flex-shrink: 0;
-        }
-
-        /* Table */
-        .comparison-table {
-            width: 100%;
-            max-width: 700px;
-            border-collapse: collapse;
-            margin: 32px 0;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            text-align: left;
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .comparison-table th {
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .comparison-table td:first-child {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .comparison-table td:last-child {
-            color: var(--text-secondary);
-        }
-
-        /* Definition Box */
-        .definition-box {
+        .stat-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Principles Grid */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        @media (max-width: 900px) {
+            .principles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .principle-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            position: relative;
+        }
+
+        .principle-number {
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--accent);
+            color: #000;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 4px;
+        }
+
+        .principle-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .principle-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .principle-example {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .principle-example .good {
+            color: var(--accent);
+        }
+
+        .principle-example .bad {
+            color: #ef4444;
+        }
+
+        /* Solution Box */
+        .solution-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent);
             border-radius: 12px;
             padding: 40px;
             max-width: 800px;
         }
 
-        .definition-box h3 {
+        .solution-box h3 {
             font-size: 1.5rem;
             margin-bottom: 16px;
         }
 
-        .definition-box p {
+        .solution-box p {
             color: var(--text-secondary);
             font-size: 1.1rem;
             line-height: 1.7;
             margin-bottom: 16px;
         }
 
-        .definition-box ul {
+        .solution-box ul {
             list-style: none;
-            margin-bottom: 0;
         }
 
-        .definition-box ul li {
+        .solution-box ul li {
             color: var(--text-secondary);
             font-size: 1.05rem;
             padding: 6px 0;
@@ -309,48 +349,162 @@
             gap: 12px;
         }
 
-        .definition-box ul li .bullet {
+        .solution-box ul li .bullet {
             color: var(--accent);
         }
 
-        /* Comparison Cards */
-        .comparison-cards {
+        /* Workflow Grid */
+        .workflow-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
-            max-width: 700px;
-            margin: 32px 0;
         }
 
-        @media (max-width: 600px) {
-            .comparison-cards {
+        @media (max-width: 900px) {
+            .workflow-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .workflow-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .comparison-card {
+        .workflow-card {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
+            padding: 28px;
+            position: relative;
+        }
+
+        .workflow-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-primary);
+            padding: 4px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+
+        .workflow-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .workflow-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .workflow-principle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(34, 197, 94, 0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Clear Pattern */
+        .clear-pattern {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 32px;
+            align-items: center;
+            margin-top: 48px;
+        }
+
+        @media (max-width: 768px) {
+            .clear-pattern {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        .clear-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
             padding: 24px;
         }
 
-        .comparison-card.negative .card-title {
+        .clear-card.before {
+            border: 1px solid #ef4444;
+        }
+
+        .clear-card.after {
+            border: 1px solid var(--accent);
+        }
+
+        .clear-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .clear-icon {
+            font-size: 1.2rem;
+        }
+
+        .clear-icon.before {
             color: #ef4444;
         }
 
-        .comparison-card.positive .card-title {
+        .clear-icon.after {
             color: var(--accent);
         }
 
-        .card-title {
-            font-weight: 600;
+        .context-bar {
+            height: 12px;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            overflow: hidden;
             margin-bottom: 8px;
         }
 
-        .card-text {
+        .context-fill {
+            height: 100%;
+            border-radius: 6px;
+        }
+
+        .context-fill.high {
+            background: linear-gradient(90deg, #ef4444 0%, #f59e0b 70%, #ef4444 100%);
+            width: 95%;
+        }
+
+        .context-fill.low {
+            background: var(--accent);
+            width: 15%;
+        }
+
+        .context-label {
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            font-size: 0.95rem;
+        }
+
+        .clear-arrow {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .clear-arrow {
+                transform: rotate(90deg);
+                justify-self: center;
+            }
         }
 
         /* Code Block */
@@ -391,59 +545,6 @@
 
         .code-content .keyword {
             color: var(--accent);
-        }
-
-        /* Flow Grid */
-        .flow-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        @media (max-width: 900px) {
-            .flow-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 500px) {
-            .flow-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .flow-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-            position: relative;
-        }
-
-        .flow-card::before {
-            content: attr(data-step);
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            background: var(--bg-primary);
-            padding: 4px 12px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--accent);
-            border: 1px solid var(--border);
-            border-radius: 4px;
-        }
-
-        .flow-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .flow-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.5;
         }
 
         /* CTA Section */
@@ -513,202 +614,14 @@
             }
         }
 
-        .hero h1, .hero-list, .hero-punchline, .hero-persona, .hero-cta {
+        .hero-label, .hero h1, .hero-subtitle, .hero-cta {
             animation: fadeUp 0.6s ease-out forwards;
         }
 
-        .hero h1 { animation-delay: 0s; }
-        .hero-list { animation-delay: 0.1s; }
-        .hero-punchline { animation-delay: 0.2s; }
-        .hero-persona { animation-delay: 0.3s; }
-        .hero-cta { animation-delay: 0.4s; }
-
-        /* Paradox Section */
-        .paradox-grid {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 32px;
-            max-width: 900px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .paradox-card {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 24px;
-        }
-
-        .paradox-card.negative {
-            border: 1px solid #ef4444;
-        }
-
-        .paradox-card.positive {
-            border: 1px solid var(--accent);
-        }
-
-        .paradox-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .paradox-icon {
-            font-size: 1.2rem;
-            color: #ef4444;
-        }
-
-        .paradox-icon.positive {
-            color: var(--accent);
-        }
-
-        .paradox-content {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            line-height: 1.6;
-            background: var(--bg-tertiary);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-        }
-
-        .noise-lines {
-            color: var(--text-secondary);
-        }
-
-        .plan-box {
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 4px 8px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 8px;
-        }
-
-        .plan-refs {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .plan-ref {
-            color: var(--text-secondary);
-            padding: 2px 6px;
-            background: var(--bg-secondary);
-            border-radius: 3px;
-            font-size: 0.65rem;
-        }
-
-        .plan-refs-label {
-            color: var(--text-secondary);
-            font-size: 0.65rem;
-            margin-top: 4px;
-        }
-
-        .attention-bar {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .bar-track {
-            flex: 1;
-            height: 8px;
-            background: var(--bg-tertiary);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .bar-fill {
-            height: 100%;
-            border-radius: 4px;
-        }
-
-        .bar-fill.negative {
-            background: #ef4444;
-        }
-
-        .bar-fill.positive {
-            background: var(--accent);
-        }
-
-        .bar-label {
-            font-size: 0.75rem;
-        }
-
-        .bar-label.negative {
-            color: #ef4444;
-        }
-
-        .bar-label.positive {
-            color: var(--accent);
-        }
-
-        .paradox-arrow {
-            font-size: 2rem;
-            color: var(--accent);
-        }
-
-        @media (max-width: 768px) {
-            .paradox-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .paradox-arrow {
-                transform: rotate(90deg);
-                justify-self: center;
-            }
-        }
-
-        /* Cognitive Cards */
-        .cognitive-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .cognitive-card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 28px;
-        }
-
-        .cognitive-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--bg-tertiary);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .cognitive-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .cognitive-card p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        @media (max-width: 900px) {
-            .cognitive-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-            }
-        }
+        .hero-label { animation-delay: 0s; }
+        .hero h1 { animation-delay: 0.1s; }
+        .hero-subtitle { animation-delay: 0.2s; }
+        .hero-cta { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -735,23 +648,14 @@
 </header>
 
 <main>
-    <!-- 1. Pain (Hero) -->
+    <!-- 1. Hero -->
     <section class="hero">
         <div class="container">
-            <h1>You are losing context every time you use AI to code.</h1>
-            <ul class="hero-list">
-                <li><span class="bullet">•</span> The AI suggests changes that break invariants it never knew existed</li>
-                <li><span class="bullet">•</span> You <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code> and lose hours of accumulated understanding</li>
-                <li><span class="bullet">•</span> The next session starts from zero — again</li>
-                <li><span class="bullet">•</span> Your codebase grows, but the AI's memory doesn't</li>
-            </ul>
-            <p class="hero-punchline">
-                <span class="fade">The code exists.</span><br>
-                <span class="fade">The tests exist.</span><br>
-                <strong>The reasoning does not.</strong>
-            </p>
-            <p class="hero-persona">
-                For developers using AI coding assistants like Claude Code, Cursor, or Copilot.
+            <span class="hero-label">The 2M Token Trap</span>
+            <h1>Context Engineering for AI-Assisted Development</h1>
+            <p class="hero-subtitle">
+                Context windows grew 62x in two years. AI quality didn't.<br>
+                A context window is not storage. <strong>It is cognitive load.</strong>
             </p>
             <div class="hero-cta">
                 <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
@@ -767,239 +671,179 @@
         </div>
     </section>
 
-    <!-- 2. The Real Problem -->
+    <!-- 2. The Problem -->
     <section class="section">
         <div class="container">
-            <p class="section-label">The Real Problem</p>
-            <h2 class="section-title">AI cannot recover what was never preserved</h2>
+            <p class="section-label">The Problem</p>
+            <h2 class="section-title">More tokens, same confusion</h2>
             <p class="section-text">
-                AI coding assistants are extremely good at reading, writing, and refactoring code.
-                But they cannot recover what was never written down: <strong>the original intent behind an implementation.</strong>
+                LLMs can now hold 2 million tokens in context. But <strong>capacity is not comprehension</strong>.
+                Throwing more code at a model doesn't mean it understands your intent.
             </p>
-            <p class="section-text" style="margin-top: 24px;">
-                That intent lives in places that disappear:
-            </p>
-            <ul class="problem-bullets">
-                <li><span class="bullet">•</span> Temporary research and dead ends</li>
-                <li><span class="bullet">•</span> Trade-offs discussed but never documented</li>
-                <li><span class="bullet">•</span> Mental context lost after <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
-            </ul>
-            <p class="section-text" style="margin-top: 32px;">
-                Existing practices don't solve this:
-            </p>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Approach</th>
-                        <th>Why it fails</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Documentation</td>
-                        <td>Written late, outdated quickly, or never read</td>
-                    </tr>
-                    <tr>
-                        <td>Code comments</td>
-                        <td>Too local — they explain <em>what</em>, not <em>why</em></td>
-                    </tr>
-                    <tr>
-                        <td>Extended AI sessions</td>
-                        <td>Context degrades long before the token limit</td>
-                    </tr>
-                    <tr>
-                        <td>Code reviews</td>
-                        <td>Capture correctness, not intent</td>
-                    </tr>
-                </tbody>
-            </table>
-            <p class="section-text" style="margin-top: 24px;">
-                Implementation decisions are made <strong>before</strong> code exists,
-                but most practices try to document them <strong>after</strong> the fact.
-                <strong>This cost compounds with every change.</strong>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">62x</div>
+                    <div class="stat-label">Context Growth</div>
+                    <div class="stat-desc">From 32K to 2M tokens in two years. Yet quality plateaued.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">75%</div>
+                    <div class="stat-label">The Threshold</div>
+                    <div class="stat-desc">Filling context to capacity degrades output quality.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">Lost</div>
+                    <div class="stat-label">In the Middle</div>
+                    <div class="stat-desc">Information in the middle of long contexts gets systematically ignored.</div>
+                </div>
+            </div>
+            <p class="section-text">
+                A context window is not storage. <strong>It is cognitive load.</strong><br>
+                Stuffing 195K tokens into a 200K window leaves no room for reasoning.
             </p>
         </div>
     </section>
 
-    <!-- 4. Plan Stack (Name) -->
+    <!-- 3. Three Principles -->
     <section class="section">
         <div class="container">
-            <div class="definition-box">
-                <p class="section-label" style="margin-bottom: 8px;">Introducing</p>
-                <h3>Plan Stack</h3>
+            <p class="section-label">The Solution</p>
+            <h2 class="section-title">Three principles of context engineering</h2>
+            <p class="section-text">
+                Stop treating context as infinite storage. Start engineering it like you engineer code.
+            </p>
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <span class="principle-number">01</span>
+                    <h3>Isolation</h3>
+                    <p>Provide the minimum effective context for each task. Scope by responsibility, not file size.</p>
+                    <div class="principle-example">
+                        <span class="bad">OAuth2 + billing + CSS + tests</span><br>
+                        <span class="good">OAuth2 models + relevant controller</span>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <span class="principle-number">02</span>
+                    <h3>Chaining</h3>
+                    <p>Break work into stages. Pass artifacts between them, not entire conversation histories.</p>
+                    <div class="principle-example">
+                        Plan artifact (300 lines)<br>
+                        <span class="bad">not conversation history (30K tokens)</span>
+                    </div>
+                </div>
+                <div class="principle-card">
+                    <span class="principle-number">03</span>
+                    <h3>Headroom</h3>
+                    <p>Never operate at 100% capacity. Reserve space for the model to actually think.</p>
+                    <div class="principle-example">
+                        Token limit = input + output<br>
+                        <span class="good">Leave room for reasoning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Plan Stack Solution -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">Introducing</p>
+            <h2 class="section-title">Plan Stack</h2>
+            <div class="solution-box">
+                <h3>Implementation plans as first-class artifacts</h3>
                 <p>
-                    An AI-native development workflow that treats <strong>implementation plans as first-class artifacts</strong>.
+                    Instead of letting research and decisions disappear with each <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code>,
+                    Plan Stack captures them in lightweight, reusable plans.
                 </p>
                 <p>
-                    Instead of letting research and decisions disappear, they are captured in lightweight plans and accumulated over time.
+                    A 50-file investigation becomes a 300-line plan. Six months later, reviewing one plan beats re-reading 50 files and re-discovering architectural intent.
                 </p>
                 <ul>
-                    <li><span class="bullet">•</span> Long-term memory for humans</li>
-                    <li><span class="bullet">•</span> External context for AI</li>
-                    <li><span class="bullet">•</span> A reliable starting point after <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
+                    <li><span class="bullet">+</span> Compressed research for AI context</li>
+                    <li><span class="bullet">+</span> Long-term memory for humans</li>
+                    <li><span class="bullet">+</span> A reliable starting point after context reset</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- 5. Plans are Distilled Research -->
+    <!-- 5. Workflow -->
     <section class="section">
         <div class="container">
-            <p class="section-label">Core Value</p>
-            <h2 class="section-title">Plans are distilled research</h2>
-            <p class="section-text">
-                Implementing a feature usually involves reading thousands of lines of code, exploring multiple approaches, hitting dead ends, and making dozens of small but important decisions.
+            <p class="section-label">The Workflow</p>
+            <h2 class="section-title">Research, Plan, Execute, Review</h2>
+            <p class="section-text" style="margin-bottom: 48px;">
+                Each phase applies context engineering principles. The workflow creates a self-reinforcing loop where knowledge compounds.
             </p>
-            <p class="section-text">
-                A good plan captures all of that in <strong>a few hundred lines</strong>.
-            </p>
-            <div class="comparison-cards">
-                <div class="comparison-card negative">
-                    <div class="card-title">Without a plan</div>
-                    <div class="card-text">Re-read 50 files. Re-discover everything. Re-make decisions.</div>
+            <div class="workflow-grid">
+                <div class="workflow-card" data-step="01">
+                    <h3>Research</h3>
+                    <p>AI checks <code style="background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; font-size: 0.8rem;">docs/plans/</code> for similar implementations. Never start from zero.</p>
+                    <span class="workflow-principle">Isolation</span>
                 </div>
-                <div class="comparison-card positive">
-                    <div class="card-title">With a plan</div>
-                    <div class="card-text">Read one file. Understand intent. Modify with confidence.</div>
+                <div class="workflow-card" data-step="02">
+                    <h3>Plan</h3>
+                    <p>Generate a structured implementation plan. Human reviews before any code is written.</p>
+                    <span class="workflow-principle">Headroom</span>
+                </div>
+                <div class="workflow-card" data-step="03">
+                    <h3>Execute</h3>
+                    <p>Implement with the plan as guide. The plan carries intent across context resets.</p>
+                    <span class="workflow-principle">Chaining</span>
+                </div>
+                <div class="workflow-card" data-step="04">
+                    <h3>Review</h3>
+                    <p>Compare implementation against plan. Detect drift between intent and code.</p>
+                    <span class="workflow-principle">Isolation + Chaining</span>
                 </div>
             </div>
-            <div class="code-block" style="margin: 32px 0;">
-                <div class="code-header">
-                    <span class="code-dot red"></span>
-                    <span class="code-dot yellow"></span>
-                    <span class="code-dot green"></span>
-                    <span style="margin-left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);">docs/plans/20241218_staff_message_feature.md</span>
+        </div>
+    </section>
+
+    <!-- 6. The /clear Pattern -->
+    <section class="section">
+        <div class="container">
+            <p class="section-label">The Pattern</p>
+            <h2 class="section-title">Embrace the reset</h2>
+            <p class="section-text">
+                Context degradation is inevitable. Plan Stack turns <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code> from a loss into a feature.
+            </p>
+            <div class="clear-pattern">
+                <div class="clear-card before">
+                    <div class="clear-header">
+                        <span class="clear-icon before">!</span>
+                        <span>Before /clear</span>
+                    </div>
+                    <div class="context-bar">
+                        <div class="context-fill high"></div>
+                    </div>
+                    <div class="context-label">95% context used, quality degrading</div>
                 </div>
-                <div class="code-content">
-<span style="color: var(--text-primary); font-weight: 600;"># Staff Message Feature</span>
-
-<span style="color: var(--text-secondary);">## Summary</span>
-Add staff-to-customer messaging in admin panel.
-
-<span style="color: var(--text-secondary);">## Key Decisions</span>
-<span class="keyword">•</span> Use existing notification infrastructure
-<span class="keyword">•</span> Store in messages table, not comments
-<span class="keyword">•</span> Async delivery via Sidekiq
-
-<span style="color: var(--text-secondary);">## Files to Modify</span>
-<span class="keyword">•</span> app/models/message.rb
-<span class="keyword">•</span> app/controllers/admin/messages_controller.rb
-<span class="keyword">•</span> app/views/admin/messages/
-
-<span style="color: var(--text-secondary);">## Edge Cases</span>
-<span class="keyword">•</span> Customer has notifications disabled → show in dashboard
-<span class="keyword">•</span> Staff sends during maintenance → queue for later
+                <div class="clear-arrow">+</div>
+                <div class="clear-card after">
+                    <div class="clear-header">
+                        <span class="clear-icon after">+</span>
+                        <span>Resume from plan</span>
+                    </div>
+                    <div class="context-bar">
+                        <div class="context-fill low"></div>
+                    </div>
+                    <div class="context-label">15% context, full fidelity restored</div>
                 </div>
             </div>
-            <p class="section-text">
-                Plans compress large, expensive context into something both humans and AI can reliably consume.
+            <p class="section-text" style="margin-top: 48px; text-align: center; max-width: 600px; margin-left: auto; margin-right: auto;">
+                <strong>Restart at 0% context without restarting your work.</strong>
             </p>
         </div>
     </section>
 
-    <!-- 6. Context Degradation -->
-    <section class="section">
-        <div class="container">
-            <p class="section-label">Technical Reality</p>
-            <h2 class="section-title">Context degrades before it overflows</h2>
-            <p class="section-text">
-                200K tokens sounds huge. In practice: large codebases fill it quickly, earlier instructions fade, and the AI becomes repetitive or loses constraints.
-            </p>
-            <p class="section-text">
-                The real problem isn't hitting the limit — it's <strong>losing fidelity long before you do</strong>.
-            </p>
-            <p class="section-text" style="margin-top: 24px;">
-                Plan Stack embraces this reality instead of fighting it:
-            </p>
-            <ul class="problem-bullets" style="margin-bottom: 24px;">
-                <li><span class="bullet">1.</span> Research until the approach is clear</li>
-                <li><span class="bullet">2.</span> Write the plan</li>
-                <li><span class="bullet">3.</span> Clear the context</li>
-                <li><span class="bullet">4.</span> Resume from the plan</li>
-            </ul>
-            <p class="section-text">
-                <strong>You restart at 0% context — without starting over.</strong>
-            </p>
-        </div>
-    </section>
-
-    <!-- 6.5 Context Paradox Visual -->
-    <section class="section">
-        <div class="container">
-            <p class="section-label" style="text-align: center;">The Why</p>
-            <h2 class="section-title" style="text-align: center;">Context capacity ≠ comprehension</h2>
-            <p class="section-text" style="text-align: center; max-width: 700px; margin: 0 auto 48px;">
-                LLMs have massive context windows—but attention is finite.<br>
-                Throwing 200K tokens at a model doesn't mean it understands them equally.<br>
-                <strong>Attention dilutes. Signal gets buried in noise.</strong>
-            </p>
-
-            <div class="paradox-grid">
-                <!-- Legacy Approach -->
-                <div class="paradox-card negative">
-                    <div class="paradox-header">
-                        <span class="paradox-icon">✕</span>
-                        <span>Legacy Approach</span>
-                    </div>
-                    <div class="paradox-content">
-                        <div class="noise-lines">
-                            <div style="opacity: 0.5;">░░░ ALL CODE ░░░░░░░</div>
-                            <div style="opacity: 0.4;">░░░ OLD DECISIONS ░░</div>
-                            <div style="opacity: 0.3;">░░░░░ NOISE ░░░░░░░</div>
-                            <div style="opacity: 0.5;">░░░░░░░░░░░░░░░░░░░</div>
-                        </div>
-                    </div>
-                    <div class="attention-bar">
-                        <span>Attention:</span>
-                        <div class="bar-track">
-                            <div class="bar-fill negative" style="width: 25%;"></div>
-                        </div>
-                        <span class="bar-label negative">Diluted</span>
-                    </div>
-                </div>
-
-                <!-- Arrow -->
-                <div class="paradox-arrow">→</div>
-
-                <!-- PlanStack Approach -->
-                <div class="paradox-card positive">
-                    <div class="paradox-header">
-                        <span class="paradox-icon positive">✓</span>
-                        <span>PlanStack</span>
-                    </div>
-                    <div class="paradox-content">
-                        <div class="plan-box">Active Plan</div>
-                        <div class="plan-refs">
-                            <span class="plan-ref">P1</span>
-                            <span class="plan-ref">P2</span>
-                            <span class="plan-ref">P3</span>
-                        </div>
-                        <div class="plan-refs-label">Referenced Plans</div>
-                    </div>
-                    <div class="attention-bar">
-                        <span>Attention:</span>
-                        <div class="bar-track">
-                            <div class="bar-fill positive" style="width: 90%;"></div>
-                        </div>
-                        <span class="bar-label positive">Focused</span>
-                    </div>
-                </div>
-            </div>
-
-            <p class="section-text" style="text-align: center; margin-top: 40px;">
-                PlanStack structures context like an engineer structures code:<br>
-                <strong>modular, focused, and composable.</strong>
-            </p>
-        </div>
-    </section>
-
-    <!-- 7. The One Rule -->
+    <!-- 7. Get Started -->
     <section class="section">
         <div class="container">
             <p class="section-label">Get Started</p>
-            <h2 class="section-title">The entry point</h2>
+            <h2 class="section-title">One line to begin</h2>
             <p class="section-text" style="margin-bottom: 24px;">
-                Add this line to your <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">CLAUDE.md</code>:
+                Add this instruction to your <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">CLAUDE.md</code>:
             </p>
             <div class="code-block">
                 <div class="code-header">
@@ -1012,97 +856,23 @@ Add staff-to-customer messaging in admin panel.
 <span class="keyword">Search docs/plans/ for similar past implementations before planning.</span>
                 </div>
             </div>
-            <p class="section-text" style="margin-top: 24px;">
+            <p class="section-text" style="margin-top: 32px;">
                 This single line creates the self-reinforcing loop:
             </p>
-            <ul class="problem-bullets">
-                <li><span class="bullet">•</span> Claude checks <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">docs/</code> first</li>
-                <li><span class="bullet">•</span> Finds distilled context (hundreds of tokens)</li>
-                <li><span class="bullet">•</span> Skips reading raw code (tens of thousands of tokens)</li>
+            <ul class="section-text" style="list-style: none; max-width: 600px;">
+                <li style="padding: 8px 0; display: flex; gap: 12px;"><span style="color: var(--accent);">1.</span> AI checks <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">docs/plans/</code> first</li>
+                <li style="padding: 8px 0; display: flex; gap: 12px;"><span style="color: var(--accent);">2.</span> Finds distilled context (hundreds of tokens)</li>
+                <li style="padding: 8px 0; display: flex; gap: 12px;"><span style="color: var(--accent);">3.</span> Skips reading raw code (tens of thousands of tokens)</li>
+                <li style="padding: 8px 0; display: flex; gap: 12px;"><span style="color: var(--accent);">4.</span> Each new plan adds to the knowledge base</li>
             </ul>
-            <p class="section-text" style="margin-top: 24px;">
-                Without it, Claude starts from raw code every time.<br>
-                <strong>With it, Claude leverages accumulated knowledge automatically.</strong>
-            </p>
-        </div>
-    </section>
-
-    <!-- 8. The Workflow -->
-    <section class="section">
-        <div class="container">
-            <p class="section-label">The Workflow</p>
-            <h2 class="section-title">Research → Plan → Implement → Review</h2>
-            <div class="flow-grid">
-                <div class="flow-card" data-step="01">
-                    <h3>Research</h3>
-                    <p>AI checks docs/ for similar past implementations. Never start from zero.</p>
-                </div>
-                <div class="flow-card" data-step="02">
-                    <h3>Plan</h3>
-                    <p>AI generates implementation plan. Human reviews and approves before coding.</p>
-                </div>
-                <div class="flow-card" data-step="03">
-                    <h3>Implement</h3>
-                    <p>Code with the plan as guide. Intent is documented before execution.</p>
-                </div>
-                <div class="flow-card" data-step="04">
-                    <h3>Review</h3>
-                    <p>AI compares plan vs implementation, detecting drift between intent and code.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 9. Cognitive Alignment -->
-    <section class="section">
-        <div class="container">
-            <p class="section-label" style="text-align: center;">Cognitive Architecture</p>
-            <h2 class="section-title" style="text-align: center;">Designed for how reasoning actually works</h2>
-            <div class="cognitive-grid">
-                <!-- Card 1: Limited Attention -->
-                <div class="cognitive-card">
-                    <div class="cognitive-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </div>
-                    <h3>Limited Attention</h3>
-                    <p>Both humans and LLMs have finite processing capacity. PlanStack blocks the noise and keeps focus on what matters.</p>
-                </div>
-                <!-- Card 2: Step-by-Step -->
-                <div class="cognitive-card">
-                    <div class="cognitive-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
-                            <rect x="9" y="3" width="6" height="4" rx="1"/>
-                            <path d="M9 12l2 2 4-4"/>
-                        </svg>
-                    </div>
-                    <h3>Step-by-Step Reasoning</h3>
-                    <p>Plan → Review → Implement. Each phase catches errors before they compound into costly mistakes.</p>
-                </div>
-                <!-- Card 3: Compound Knowledge -->
-                <div class="cognitive-card">
-                    <div class="cognitive-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                            <path d="M2 17l10 5 10-5"/>
-                            <path d="M2 12l10 5 10-5"/>
-                        </svg>
-                    </div>
-                    <h3>Compound Knowledge</h3>
-                    <p>Plans aren't disposable scratch paper. They're assets that improve the accuracy of every future inference.</p>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
-            <h2>Ready to stop losing context?</h2>
-            <p>Start stacking plans. Knowledge compounds with every commit.</p>
+            <h2>Stop fighting context limits</h2>
+            <p>Start engineering context. Plans compound with every commit.</p>
             <div class="hero-cta">
                 <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
                     Get Started
@@ -1120,7 +890,7 @@ Add staff-to-customer messaging in admin panel.
 
 <footer>
     <div class="container">
-        <p>Created by <a href="https://x-hack.jp">X-HACK Inc.</a> • Proven with a 10-engineer team on a 500-table Rails app • MIT License</p>
+        <p>Created by <a href="https://x-hack.jp">X-HACK Inc.</a> | Proven with a 10-engineer team on a 500-table Rails app | MIT License</p>
         <div class="footer-links">
             <a href="https://github.com/planstack-ai/planstack">GitHub</a>
             <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Documentation</a>
