@@ -178,10 +178,9 @@
             color: var(--text-secondary);
         }
 
-        .hero-emphasis {
-            font-size: 1.15rem;
-            color: var(--text-primary);
-            font-weight: 600;
+        .hero-persona {
+            font-size: 1rem;
+            color: var(--text-secondary);
             margin-bottom: 40px;
         }
 
@@ -514,14 +513,14 @@
             }
         }
 
-        .hero h1, .hero-list, .hero-punchline, .hero-emphasis, .hero-cta {
+        .hero h1, .hero-list, .hero-punchline, .hero-persona, .hero-cta {
             animation: fadeUp 0.6s ease-out forwards;
         }
 
         .hero h1 { animation-delay: 0s; }
         .hero-list { animation-delay: 0.1s; }
         .hero-punchline { animation-delay: 0.2s; }
-        .hero-emphasis { animation-delay: 0.3s; }
+        .hero-persona { animation-delay: 0.3s; }
         .hero-cta { animation-delay: 0.4s; }
 
         /* Paradox Section */
@@ -741,18 +740,18 @@
         <div class="container">
             <h1>You are losing context every time you use AI to code.</h1>
             <ul class="hero-list">
-                <li><span class="bullet">•</span> You don't remember <strong>why</strong> it was designed this way</li>
-                <li><span class="bullet">•</span> The AI confidently suggests changes that break invariants</li>
-                <li><span class="bullet">•</span> Fixing a bug requires re-reading dozens of files</li>
-                <li><span class="bullet">•</span> You hesitate to touch the code because the original intent is gone</li>
+                <li><span class="bullet">•</span> The AI suggests changes that break invariants it never knew existed</li>
+                <li><span class="bullet">•</span> You <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code> and lose hours of accumulated understanding</li>
+                <li><span class="bullet">•</span> The next session starts from zero — again</li>
+                <li><span class="bullet">•</span> Your codebase grows, but the AI's memory doesn't</li>
             </ul>
             <p class="hero-punchline">
                 <span class="fade">The code exists.</span><br>
                 <span class="fade">The tests exist.</span><br>
                 <strong>The reasoning does not.</strong>
             </p>
-            <p class="hero-emphasis">
-                This is not a tooling problem. This is a context preservation problem.
+            <p class="hero-persona">
+                For developers using AI coding assistants like Claude Code, Cursor, or Copilot.
             </p>
             <div class="hero-cta">
                 <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
@@ -772,36 +771,22 @@
     <section class="section">
         <div class="container">
             <p class="section-label">The Real Problem</p>
-            <h2 class="section-title">AI is bad at recovering original intent</h2>
+            <h2 class="section-title">AI cannot recover what was never preserved</h2>
             <p class="section-text">
                 AI coding assistants are extremely good at reading, writing, and refactoring code.
-            </p>
-            <p class="section-text">
-                They are extremely bad at one thing: <strong>recovering the original intent behind an implementation.</strong>
+                But they cannot recover what was never written down: <strong>the original intent behind an implementation.</strong>
             </p>
             <p class="section-text" style="margin-top: 24px;">
-                That intent usually lives in:
+                That intent lives in places that disappear:
             </p>
             <ul class="problem-bullets">
-                <li><span class="bullet">•</span> Temporary research</li>
-                <li><span class="bullet">•</span> Dead ends that were explored and rejected</li>
-                <li><span class="bullet">•</span> Trade-offs that were discussed but never written down</li>
-                <li><span class="bullet">•</span> Mental context that disappears after <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
+                <li><span class="bullet">•</span> Temporary research and dead ends</li>
+                <li><span class="bullet">•</span> Trade-offs discussed but never documented</li>
+                <li><span class="bullet">•</span> Mental context lost after <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">/clear</code></li>
             </ul>
-            <p class="section-text" style="margin-top: 24px;">
-                Once that context is gone, both humans and AI are forced to re-read large parts of the codebase, re-discover edge cases, and re-make the same decisions again.
+            <p class="section-text" style="margin-top: 32px;">
+                Existing practices don't solve this:
             </p>
-            <p class="section-text">
-                <strong>This cost repeats forever.</strong>
-            </p>
-        </div>
-    </section>
-
-    <!-- 3. Why Existing Practices Fail -->
-    <section class="section">
-        <div class="container">
-            <p class="section-label">Why Existing Practices Fail</p>
-            <h2 class="section-title">The problem is structural</h2>
             <table class="comparison-table">
                 <thead>
                     <tr>
@@ -819,18 +804,19 @@
                         <td>Too local — they explain <em>what</em>, not <em>why</em></td>
                     </tr>
                     <tr>
-                        <td>Long AI sessions</td>
+                        <td>Extended AI sessions</td>
                         <td>Context degrades long before the token limit</td>
                     </tr>
                     <tr>
                         <td>Code reviews</td>
-                        <td>Capture correctness, not original reasoning</td>
+                        <td>Capture correctness, not intent</td>
                     </tr>
                 </tbody>
             </table>
-            <p class="section-text">
-                Implementation decisions are made <strong>before</strong> code exists,<br>
+            <p class="section-text" style="margin-top: 24px;">
+                Implementation decisions are made <strong>before</strong> code exists,
                 but most practices try to document them <strong>after</strong> the fact.
+                <strong>This cost compounds with every change.</strong>
             </p>
         </div>
     </section>
@@ -865,7 +851,7 @@
                 Implementing a feature usually involves reading thousands of lines of code, exploring multiple approaches, hitting dead ends, and making dozens of small but important decisions.
             </p>
             <p class="section-text">
-                A good plan captures all of that in <strong>200–300 lines</strong>.
+                A good plan captures all of that in <strong>a few hundred lines</strong>.
             </p>
             <div class="comparison-cards">
                 <div class="comparison-card negative">
@@ -875,6 +861,34 @@
                 <div class="comparison-card positive">
                     <div class="card-title">With a plan</div>
                     <div class="card-text">Read one file. Understand intent. Modify with confidence.</div>
+                </div>
+            </div>
+            <div class="code-block" style="margin: 32px 0;">
+                <div class="code-header">
+                    <span class="code-dot red"></span>
+                    <span class="code-dot yellow"></span>
+                    <span class="code-dot green"></span>
+                    <span style="margin-left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary);">docs/plans/20241218_staff_message_feature.md</span>
+                </div>
+                <div class="code-content">
+<span style="color: var(--text-primary); font-weight: 600;"># Staff Message Feature</span>
+
+<span style="color: var(--text-secondary);">## Summary</span>
+Add staff-to-customer messaging in admin panel.
+
+<span style="color: var(--text-secondary);">## Key Decisions</span>
+<span class="keyword">•</span> Use existing notification infrastructure
+<span class="keyword">•</span> Store in messages table, not comments
+<span class="keyword">•</span> Async delivery via Sidekiq
+
+<span style="color: var(--text-secondary);">## Files to Modify</span>
+<span class="keyword">•</span> app/models/message.rb
+<span class="keyword">•</span> app/controllers/admin/messages_controller.rb
+<span class="keyword">•</span> app/views/admin/messages/
+
+<span style="color: var(--text-secondary);">## Edge Cases</span>
+<span class="keyword">•</span> Customer has notifications disabled → show in dashboard
+<span class="keyword">•</span> Staff sends during maintenance → queue for later
                 </div>
             </div>
             <p class="section-text">
@@ -983,7 +997,7 @@
     <section class="section">
         <div class="container">
             <p class="section-label">Get Started</p>
-            <h2 class="section-title">The one rule that makes everything work</h2>
+            <h2 class="section-title">The entry point</h2>
             <p class="section-text" style="margin-bottom: 24px;">
                 Add this line to your <code style="background: var(--bg-tertiary); padding: 2px 8px; border-radius: 4px;">CLAUDE.md</code>:
             </p>
@@ -1097,10 +1111,7 @@
                     </svg>
                 </a>
                 <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    Star on GitHub
+                    View on GitHub
                 </a>
             </div>
         </div>
