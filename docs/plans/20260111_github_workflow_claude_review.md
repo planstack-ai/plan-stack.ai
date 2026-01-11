@@ -62,3 +62,4 @@ jobs:
 - Automatic review on PR creation/update
 - Also responds to `@claude` mentions in comments
 - **Required Setup**: Add `ANTHROPIC_API_KEY` in Repository Settings > Secrets
+- **Required Permission**: `id-token: write` is needed for OIDC authentication with Anthropic API
