@@ -28,10 +28,16 @@ on:
 jobs:
   review:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
     steps:
+      - uses: actions/checkout@v4
       - uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ### Option B: Custom Implementation
@@ -62,4 +68,4 @@ jobs:
 - Automatic review on PR creation/update
 - Also responds to `@claude` mentions in comments
 - **Required Setup**: Add `ANTHROPIC_API_KEY` in Repository Settings > Secrets
-- **Required Permission**: `id-token: write` is needed for OIDC authentication with Anthropic API
+- **GitHub Token**: Explicitly pass `github_token: ${{ secrets.GITHUB_TOKEN }}` to bypass OIDC requirement (avoids needing Anthropic GitHub App installation)
