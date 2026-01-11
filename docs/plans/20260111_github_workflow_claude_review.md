@@ -1,23 +1,23 @@
 # GitHub Workflow: Claude AI Review
 
 ## Overview
-PRに対してClaude AIによる自動コードレビューを実行するGitHub Actionsワークフローを追加する。
+Add a GitHub Actions workflow that performs automatic code review using Claude AI on pull requests.
 
 ## Background
-- PRのコードレビュー品質を向上させたい
-- 人間のレビュー前にAIが基本的な問題を検出
-- Plan Stackのドッグフーディング（自分たちのプロダクトで使う）
+- Improve PR code review quality
+- AI detects basic issues before human review
+- Dogfooding Plan Stack (using our own product)
 
 ## Research Required
-- [ ] Claude GitHub Action の公式実装を調査
+- [ ] Investigate official Claude GitHub Action implementation
   - https://github.com/anthropics/claude-code-action
-  - または anthropic API を直接使用するカスタム実装
-- [ ] 必要な secrets (ANTHROPIC_API_KEY) の設定方法
-- [ ] レビュー対象のファイルパターン設定
+  - Or custom implementation using Anthropic API directly
+- [ ] Setup method for required secrets (ANTHROPIC_API_KEY)
+- [ ] File pattern configuration for review targets
 
 ## Implementation Options
 
-### Option A: claude-code-action (公式)
+### Option A: claude-code-action (Official)
 ```yaml
 # .github/workflows/claude-review.yml
 name: Claude Code Review
@@ -34,31 +34,31 @@ jobs:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
 ```
 
-### Option B: カスタム実装
-- Anthropic API を直接呼び出すスクリプト
-- より細かいカスタマイズが可能
+### Option B: Custom Implementation
+- Script that calls Anthropic API directly
+- Allows more fine-grained customization
 
 ## Acceptance Criteria
-- [ ] PRが作成/更新されたときに自動でレビューが実行される
-- [ ] レビューコメントがPRに投稿される
-- [ ] API キーが secrets で安全に管理されている
+- [ ] Review is automatically executed when PR is created/updated
+- [ ] Review comments are posted to the PR
+- [ ] API key is securely managed via secrets
 
 ## Files to Create/Modify
-- `.github/workflows/claude-review.yml` (新規作成)
+- `.github/workflows/claude-review.yml` (create new)
 
 ## Questions
-- レビューの対象範囲は？（全ファイル or 特定パターン）
-- レビューのトーン/厳しさは？
-- 日本語でレビューするか英語か？
+- Review scope? (all files or specific patterns)
+- Review tone/strictness?
+- Review in Japanese or English?
 
 ## Status
-- [x] Research - claude-code-action v1 を採用
-- [x] Implementation - `.github/workflows/claude-review.yml` 作成
-- [ ] Testing - PR作成して動作確認
+- [x] Research - Adopted claude-code-action v1
+- [x] Implementation - Created `.github/workflows/claude-review.yml`
+- [ ] Testing - Create PR and verify behavior
 - [ ] Documentation
 
 ## Implementation Notes
-- `anthropics/claude-code-action@v1` を使用
-- PR作成/更新時に自動レビュー
-- `@claude` メンションでコメントにも対応
-- **必要な設定**: Repository Settings > Secrets > `ANTHROPIC_API_KEY` を追加
+- Using `anthropics/claude-code-action@v1`
+- Automatic review on PR creation/update
+- Also responds to `@claude` mentions in comments
+- **Required Setup**: Add `ANTHROPIC_API_KEY` in Repository Settings > Secrets
