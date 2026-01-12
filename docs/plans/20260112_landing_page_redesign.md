@@ -24,23 +24,29 @@ Redesign the index.html landing page to align with the "2M Token Trap" article a
 
 - Three principles (Isolation, Chaining, Headroom) not explicitly stated
 - "Context engineering" concept underdeveloped
-- Strong hook ("2M Token Trap") not utilized
+- Product identity unclear (tool vs methodology?)
+- Social proof buried in footer
 
 ## Key Decisions
 
-1. **Lead with the hook**: "The 2M Token Trap" as hero badge
-2. **Three principles as central section**: Visual cards for Isolation, Chaining, Headroom
-3. **Stats-driven problem section**: 62x, 75%, "Lost in the Middle"
-4. **Workflow-principle mapping**: Each workflow step linked to a principle
-5. **Simplified structure**: Remove Paradox Visual and Cognitive Architecture sections
+1. **Hero label**: "AI-Native Workflow" (positive framing over technical problem)
+2. **Product definition**: Clarify Plan Stack is a methodology, not a tool
+3. **Social proof early**: Move credibility statement from footer to hero
+4. **Three principles as central section**: Visual cards for Isolation, Chaining, Headroom
+5. **Stats-driven problem section**: 62x, 75%, "Lost in the Middle"
+6. **Workflow-principle mapping**: Each workflow step linked to a principle
+7. **Copy improvements**: "cognitive load" and clearer 75% explanation
 
 ## New Section Structure
 
 ```
 1. Hero
-   - Badge: "The 2M Token Trap"
+   - Badge: "AI-Native Workflow"
    - Title: "Context Engineering for AI-Assisted Development"
-   - Subtitle: 62x growth, quality didn't follow
+   - Subtitle: "Context windows grew 62x... cognitive load"
+   - Definition: "Plan Stack is a methodology — no install required..."
+   - Social Proof: "Proven with a 10-engineer team on a 500-table Rails app"
+   - CTA: Get Started / GitHub
 
 2. The Problem
    - Stats grid: 62x, 75%, Lost in the Middle
@@ -80,18 +86,28 @@ Redesign the index.html landing page to align with the "2M Token Trap" article a
 
 - `index.html` - Complete rewrite with new structure
 
-## CSS Changes
+## CSS Added
 
-- Added `.stats-grid`, `.stat-card` for problem section
-- Added `.principles-grid`, `.principle-card` for three principles
-- Added `.clear-pattern`, `.clear-card` for /clear visualization
-- Added `.workflow-principle` tags
-- Added `--warning` color variable for hero badge
-- Removed unused CSS (paradox, cognitive grid)
+- `.stats-grid`, `.stat-card` for problem section
+- `.principles-grid`, `.principle-card` for three principles
+- `.clear-pattern`, `.clear-card` for /clear visualization
+- `.workflow-principle` tags
+- `.hero-definition` for product definition
+- `.hero-proof` for social proof with checkmark
+
+## Copy Changes
+
+| Location | Before | After |
+|----------|--------|-------|
+| Hero label | "The 2M Token Trap" | "AI-Native Workflow" |
+| Hero subtitle | "Plan Stack brings structured context..." | "A context window is not storage. It is cognitive load." |
+| 75% stat | "Claude Code improved dramatically..." | "Filling context to capacity degrades output quality." |
+| Hero (new) | - | Product definition + Social proof |
 
 ## Verification
 
 1. Open index.html in browser
-2. Check responsive design on mobile/tablet
-3. Verify all GitHub links work
-4. Confirm visual hierarchy: Hook → Problem → Solution → Action
+2. Verify product identity is clear within 3 seconds
+3. Check responsive design on mobile/tablet
+4. Verify all GitHub links work
+5. Confirm visual hierarchy: Label → Title → Problem → Definition → Proof → CTA

@@ -165,8 +165,36 @@
             font-size: 1.25rem;
             color: var(--text-secondary);
             max-width: 700px;
-            margin: 0 auto 40px;
+            margin: 0 auto 24px;
             line-height: 1.7;
+        }
+
+        .hero-definition {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .hero-definition code {
+            background: var(--bg-tertiary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .hero-proof {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin: 0 auto 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-proof::before {
+            content: "✓";
         }
 
         .hero-cta {
@@ -614,14 +642,16 @@
             }
         }
 
-        .hero-label, .hero h1, .hero-subtitle, .hero-cta {
+        .hero-label, .hero h1, .hero-subtitle, .hero-definition, .hero-proof, .hero-cta {
             animation: fadeUp 0.6s ease-out forwards;
         }
 
         .hero-label { animation-delay: 0s; }
         .hero h1 { animation-delay: 0.1s; }
         .hero-subtitle { animation-delay: 0.2s; }
-        .hero-cta { animation-delay: 0.3s; }
+        .hero-definition { animation-delay: 0.3s; }
+        .hero-proof { animation-delay: 0.35s; }
+        .hero-cta { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -651,11 +681,17 @@
     <!-- 1. Hero -->
     <section class="hero">
         <div class="container">
-            <span class="hero-label">The 2M Token Trap</span>
+            <span class="hero-label">AI-Native Workflow</span>
             <h1>Context Engineering for AI-Assisted Development</h1>
             <p class="hero-subtitle">
                 Context windows grew 62x in two years. AI quality didn't.<br>
                 A context window is not storage. <strong>It is cognitive load.</strong>
+            </p>
+            <p class="hero-definition">
+                Plan Stack is a methodology — no install required, just a <code>docs/</code> folder and one line in CLAUDE.md.
+            </p>
+            <p class="hero-proof">
+                Proven with a 10-engineer team on a 500-table Rails app
             </p>
             <div class="hero-cta">
                 <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md" class="btn btn-primary">
