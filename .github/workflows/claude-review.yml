@@ -30,4 +30,5 @@ jobs:
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          direct_prompt: "Review this PR. Point out any bugs, security issues, or improvements."
+          trigger_phrase: "@claude"
+          prompt: "Review this PR. Point out any bugs, security issues, or improvements."
