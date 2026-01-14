@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is Context Window - Basics #1 - Plan Stack</title>
+    <meta name="description" content="Understanding context windows: it's working memory, not storage. Learn why 200K tokens doesn't mean 200K tokens of quality.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-tertiary: #1a1a1d;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #22c55e;
+            --accent-dim: #16a34a;
+            --border: #27272a;
+            --warning: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
+        header { padding: 24px 0; border-bottom: 1px solid var(--border); }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.25rem; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: 20px; height: 20px; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a.active { color: var(--text-primary); }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; }
+        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+
+        /* Lesson Layout */
+        .lesson-container { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
+
+        .lesson-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .lesson-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(34, 197, 94, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .lesson-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .lesson-title {
+            font-size: clamp(1.75rem, 4vw, 2.25rem);
+            font-weight: 700;
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
+
+        .lesson-content h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 40px 0 16px;
+            color: var(--text-primary);
+        }
+
+        .lesson-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .lesson-content strong {
+            color: var(--text-primary);
+        }
+
+        .lesson-content ul, .lesson-content ol {
+            color: var(--text-secondary);
+            margin: 16px 0 24px 24px;
+        }
+
+        .lesson-content li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+        }
+
+        .callout {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .callout.warning {
+            border-left-color: var(--warning);
+        }
+
+        .analogy-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 28px 0;
+        }
+
+        .analogy-box h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analogy-box p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        .key-takeaway {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 40px 0;
+        }
+
+        .key-takeaway h3 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .key-takeaway ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .key-takeaway li {
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        /* Navigation */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            margin-top: 48px;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .lesson-nav-btn:hover {
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        .lesson-nav-btn.primary {
+            background: var(--accent);
+            color: #000;
+            font-weight: 600;
+        }
+
+        .lesson-nav-btn.primary:hover {
+            background: var(--accent-dim);
+        }
+
+        .progress-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+
+        .progress-dot.active {
+            background: var(--accent);
+        }
+
+        .progress-dot.completed {
+            background: var(--accent-dim);
+        }
+
+        /* Footer */
+        footer { padding: 40px 0; border-top: 1px solid var(--border); }
+        footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        footer p { color: var(--text-secondary); font-size: 0.9rem; }
+        footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        footer a:hover { color: var(--text-primary); }
+        .footer-links { display: flex; gap: 24px; }
+
+        @media (max-width: 600px) {
+            .lesson-nav { flex-direction: column; gap: 16px; }
+            .lesson-nav-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <a href="../../" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M4 6h16M4 12h16M4 18h10" stroke="#000"/>
+                </svg>
+            </div>
+            Plan Stack
+        </a>
+        <nav class="nav-links">
+            <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Docs</a>
+            <a href="../" class="active">Learn</a>
+            <a href="../../articles/">Blog</a>
+            <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <article class="lesson-container">
+        <div class="lesson-meta">
+            <span class="lesson-badge">Basics</span>
+            <span class="lesson-number">Lesson 1 of 5</span>
+        </div>
+
+        <h1 class="lesson-title">What is Context Window</h1>
+
+        <div class="lesson-content">
+            <p>
+                Here's a common story: You feed Claude Code your entire codebase—every file, every folder.
+                It has 200,000 tokens of context, so why not use it all? Then Claude produces something
+                that completely misses the point. It ignores your architecture. It duplicates code that
+                already exists. <strong>What went wrong?</strong>
+            </p>
+
+            <p>
+                The misconception is simple: <strong>long context = always accurate</strong>.
+                This is wrong, and understanding why is the first step to using Claude effectively.
+            </p>
+
+            <h2>The Desk Analogy</h2>
+
+            <div class="analogy-box">
+                <h3>Think of context window as a desk, not a filing cabinet</h3>
+                <p>
+                    A filing cabinet stores documents—you can stuff thousands of pages in there.
+                    A desk is where you actually work. You can only spread out so many papers before
+                    it becomes impossible to find anything or think clearly. The context window is your
+                    desk. It's working memory, not storage.
+                </p>
+            </div>
+
+            <h2>What Are Tokens?</h2>
+
+            <p>
+                Tokens are the units Claude uses to measure text. Roughly:
+            </p>
+            <ul>
+                <li>1 token ≈ 4 characters in English</li>
+                <li>1 token ≈ 0.75 words</li>
+                <li>A typical code file (200 lines) ≈ 1,000-2,000 tokens</li>
+            </ul>
+
+            <p>
+                When Claude has a "200K token context window," it means it can hold about
+                <strong>150,000 words</strong> at once. That's roughly 500 pages of a book,
+                or 100-200 code files.
+            </p>
+
+            <h2>"Can Read" vs "Can Pay Attention To"</h2>
+
+            <p>
+                Here's the critical insight: <strong>Claude can read 200K tokens, but it cannot
+                pay equal attention to all of them.</strong>
+            </p>
+
+            <div class="callout warning">
+                <p>
+                    Just like you can't focus on everything in a 500-page book at once,
+                    Claude's attention is limited. Information in the middle of long contexts
+                    gets systematically ignored—a phenomenon called "Lost in the Middle."
+                </p>
+            </div>
+
+            <p>
+                This means dumping everything into context doesn't help. It actively hurts.
+                More noise means less signal. The model has to work harder to find what matters,
+                and often fails.
+            </p>
+
+            <h2>The Real Question</h2>
+
+            <p>
+                Instead of asking "how much can I fit?" start asking <strong>"what does Claude
+                actually need to know for this specific task?"</strong>
+            </p>
+
+            <p>
+                That mindset shift—from maximizing input to optimizing input—is what separates
+                frustrating Claude sessions from productive ones.
+            </p>
+
+            <div class="key-takeaway">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li>Context window is working memory, not storage</li>
+                    <li>200K tokens ≠ 200K tokens of quality attention</li>
+                    <li>"Can read" and "can pay attention to" are different things</li>
+                    <li>More context often means worse results, not better</li>
+                </ul>
+            </div>
+        </div>
+
+        <nav class="lesson-nav">
+            <a href="../" class="lesson-nav-btn">← Back to Learn</a>
+            <div class="progress-dots">
+                <span class="progress-dot active"></span>
+                <span class="progress-dot"></span>
+                <span class="progress-dot"></span>
+                <span class="progress-dot"></span>
+                <span class="progress-dot"></span>
+            </div>
+            <a href="./2.html" class="lesson-nav-btn primary">Next: What Consumes Tokens →</a>
+        </nav>
+    </article>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Created by <a href="https://x-hack.jp">X-HACK Inc.</a> | MIT License</p>
+        <div class="footer-links">
+            <a href="https://github.com/planstack-ai/planstack">GitHub</a>
+            <a href="../">Learn</a>
+            <a href="../../articles/">Blog</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

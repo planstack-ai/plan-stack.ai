@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Claude Code - Plan Stack</title>
+    <meta name="description" content="Master Claude Code with our structured learning path. From context window basics to advanced workflows.">
+    <meta property="og:title" content="Learn Claude Code - Plan Stack">
+    <meta property="og:description" content="Master Claude Code with our structured learning path. From context window basics to advanced workflows.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://plan-stack.ai/learn">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-tertiary: #1a1a1d;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #22c55e;
+            --accent-dim: #16a34a;
+            --border: #27272a;
+            --warning: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            padding: 40px 0 60px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-content p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .intro-content strong {
+            color: var(--text-primary);
+        }
+
+        /* Courses Grid */
+        .courses-section {
+            padding: 60px 0 100px;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 700px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .course-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .course-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background: rgba(34, 197, 94, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 20px;
+            align-self: flex-start;
+        }
+
+        .course-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .course-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .course-stats {
+            display: flex;
+            gap: 16px;
+        }
+
+        .course-stat {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .course-stat svg {
+            width: 16px;
+            height: 16px;
+            opacity: 0.7;
+        }
+
+        .course-arrow {
+            color: var(--accent);
+            font-size: 1.25rem;
+        }
+
+        /* Topics List */
+        .topics-list {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .topics-list li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .topics-list li::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <a href="../" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M4 6h16M4 12h16M4 18h10" stroke="#000"/>
+                </svg>
+            </div>
+            Plan Stack
+        </a>
+        <nav class="nav-links">
+            <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Docs</a>
+            <a href="./" class="active">Learn</a>
+            <a href="../articles/">Blog</a>
+            <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="page-header">
+        <div class="container">
+            <p class="section-label">Learn Claude Code</p>
+            <h1 class="page-title">Master Claude Code</h1>
+            <p class="page-description">
+                A structured learning path from understanding context windows to building automated systems. Each lesson takes 1-2 minutes.
+            </p>
+        </div>
+    </section>
+
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <p>
+                    Most people use Claude Code like a magic box: throw code in, hope for good output.
+                    <strong>That approach hits a wall fast.</strong>
+                </p>
+                <p>
+                    The difference between frustrating sessions and productive ones isn't the model—it's understanding how to work with it. Context windows, token limits, prompting strategies—these aren't advanced topics. They're the basics that nobody teaches.
+                </p>
+                <p>
+                    This series covers what you need to know, in order. Start with <strong>Basics</strong> to understand the fundamentals, then move to <strong>Practical</strong> for real-world techniques.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="courses-section">
+        <div class="container">
+            <div class="courses-grid">
+                <a href="./basics/1.html" class="course-card">
+                    <span class="course-badge">START HERE</span>
+                    <h2 class="course-title">Basics</h2>
+                    <p class="course-description">
+                        Understand how Claude Code actually works. Context windows, tokens, and why longer doesn't mean better.
+                    </p>
+                    <ul class="topics-list">
+                        <li>What is Context Window</li>
+                        <li>What Consumes Tokens</li>
+                        <li>Why Accuracy Drops with Length</li>
+                        <li>Context Design Principles</li>
+                        <li>Practical Workflow</li>
+                    </ul>
+                    <div class="course-meta">
+                        <div class="course-stats">
+                            <span class="course-stat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 6v6l4 2"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                ~10 min
+                            </span>
+                            <span class="course-stat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                                5 lessons + quiz
+                            </span>
+                        </div>
+                        <span class="course-arrow">→</span>
+                    </div>
+                </a>
+
+                <a href="./practical/1.html" class="course-card">
+                    <span class="course-badge">LEVEL UP</span>
+                    <h2 class="course-title">Practical</h2>
+                    <p class="course-description">
+                        Real-world techniques that work. From planning to prompting to building automated systems.
+                    </p>
+                    <ul class="topics-list">
+                        <li>Think First</li>
+                        <li>CLAUDE.md</li>
+                        <li>Context Window Limits</li>
+                        <li>Prompting That Works</li>
+                        <li>MCP, Hooks, and Tools</li>
+                        <li>When Claude Gets Stuck</li>
+                        <li>Build Systems, Not One-Shots</li>
+                    </ul>
+                    <div class="course-meta">
+                        <div class="course-stats">
+                            <span class="course-stat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 6v6l4 2"/>
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                ~15 min
+                            </span>
+                            <span class="course-stat">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                                </svg>
+                                7 lessons + quiz
+                            </span>
+                        </div>
+                        <span class="course-arrow">→</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Created by <a href="https://x-hack.jp">X-HACK Inc.</a> | MIT License</p>
+        <div class="footer-links">
+            <a href="https://github.com/planstack-ai/planstack">GitHub</a>
+            <a href="./">Learn</a>
+            <a href="../articles/">Blog</a>
+            <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Documentation</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
