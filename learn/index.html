@@ -328,6 +328,69 @@
             display: flex;
             gap: 24px;
         }
+
+        /* Philosophy Section */
+        .philosophy-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .philosophy-content {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .philosophy-content h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .philosophy-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .philosophy-content .note {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+
+        .philosophy-content ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .philosophy-content ul li {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .philosophy-content ul li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .philosophy-content .closing {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .philosophy-content .closing p {
+            margin-bottom: 4px;
+        }
     </style>
 </head>
 <body>
@@ -379,6 +442,48 @@
                 <p>
                     This series covers what you need to know, in order. Start with <strong>Basics</strong> to understand the fundamentals, then move to <strong>Practical</strong> for real-world techniques.
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="philosophy-section">
+        <div class="container">
+            <div class="philosophy-content">
+                <h2>Why This Series Is Short</h2>
+                <p>
+                    Long articles feel authoritative.<br>
+                    That's a mental shortcut: length = depth = value.
+                </p>
+                <p class="note">
+                    (This is called Effort Heuristic and Authority Bias—we tend to trust things that look like they took more work.)
+                </p>
+                <p>
+                    Content farms know this. SEO rewards it.<br>
+                    But it's a trick, not quality.
+                </p>
+                <p>
+                    If you use LLMs, this probably sounds familiar:
+                </p>
+                <ul>
+                    <li>Attention is limited (context windows exist)</li>
+                    <li>More input ≠ better output</li>
+                    <li>Passing only what's needed usually wins</li>
+                </ul>
+                <p>
+                    Same goes for readers.
+                </p>
+                <p>
+                    So we applied context-window thinking to writing:
+                </p>
+                <ul>
+                    <li>Each article: 1–2 min</li>
+                    <li>Total: under 30 min</li>
+                    <li>Density over volume</li>
+                </ul>
+                <div class="closing">
+                    <p>We don't pad for authority.</p>
+                    <p>We respect your attention.</p>
+                </div>
             </div>
         </div>
     </section>
