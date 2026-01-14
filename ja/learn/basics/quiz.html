@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基礎クイズ - Plan Stack</title>
+    <meta name="description" content="Claude Code の基礎の理解をテスト。5つの問題で知識を確認。">
+    <link rel="alternate" hreflang="en" href="https://plan-stack.ai/learn/basics/quiz.html">
+    <link rel="alternate" hreflang="ja" href="https://plan-stack.ai/ja/learn/basics/quiz.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-primary: #0a0a0b; --bg-secondary: #111113; --bg-tertiary: #1a1a1d; --text-primary: #fafafa; --text-secondary: #a1a1aa; --accent: #22c55e; --accent-dim: #16a34a; --border: #27272a; --warning: #f59e0b; --red: #ef4444; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Noto Sans JP', 'Space Grotesk', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        header { padding: 24px 0; border-bottom: 1px solid var(--border); }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 700; font-size: 1.25rem; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .logo-icon svg { width: 20px; height: 20px; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a.active { color: var(--text-primary); }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-secondary:hover { background: var(--border); }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { background: var(--accent-dim); }
+        .btn-primary:disabled { background: var(--border); color: var(--text-secondary); cursor: not-allowed; }
+        .lang-switch { font-size: 0.85rem; padding: 6px 12px; border-radius: 6px; background: var(--bg-tertiary); border: 1px solid var(--border); }
+
+        .quiz-container { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
+        .quiz-header { text-align: center; margin-bottom: 48px; }
+        .quiz-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); background: rgba(34, 197, 94, 0.1); padding: 6px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 16px; }
+        .quiz-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; margin-bottom: 12px; }
+        .quiz-subtitle { color: var(--text-secondary); font-size: 1.05rem; }
+
+        .question { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+        .question-number { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent); margin-bottom: 12px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option { display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: var(--text-secondary); }
+        .option.selected { border-color: var(--accent); background: rgba(34, 197, 94, 0.1); }
+        .option.correct { border-color: var(--accent); background: rgba(34, 197, 94, 0.2); }
+        .option.incorrect { border-color: var(--red); background: rgba(239, 68, 68, 0.1); }
+        .option.disabled { pointer-events: none; }
+        .option-radio { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .option.selected .option-radio { border-color: var(--accent); }
+        .option.selected .option-radio::after { content: ''; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+        .option.correct .option-radio { border-color: var(--accent); }
+        .option.correct .option-radio::after { content: '\2713'; color: var(--accent); font-size: 12px; font-weight: bold; }
+        .option.incorrect .option-radio { border-color: var(--red); }
+        .option.incorrect .option-radio::after { content: '\2717'; color: var(--red); font-size: 12px; font-weight: bold; }
+        .option-text { color: var(--text-secondary); font-size: 0.95rem; }
+        .option.selected .option-text { color: var(--text-primary); }
+
+        .quiz-actions { display: flex; justify-content: center; margin-top: 32px; }
+        .quiz-results { text-align: center; padding: 32px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; margin-top: 32px; display: none; }
+        .quiz-results.show { display: block; }
+        .results-score { font-size: 3rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+        .results-text { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 24px; }
+        .results-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--border); }
+        footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        footer p { color: var(--text-secondary); font-size: 0.9rem; }
+        footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+        footer a:hover { color: var(--text-primary); }
+        .footer-links { display: flex; gap: 24px; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <a href="../../../" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h10" stroke="#000"/></svg>
+            </div>
+            Plan Stack
+        </a>
+        <nav class="nav-links">
+            <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Docs</a>
+            <a href="../" class="active">学ぶ</a>
+            <a href="../../../articles/">Blog</a>
+            <a href="../../../learn/basics/quiz.html" class="lang-switch">EN</a>
+            <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <span class="quiz-badge">基礎完了</span>
+            <h1 class="quiz-title">基礎クイズ</h1>
+            <p class="quiz-subtitle">5つの問題で理解をテスト</p>
+        </div>
+
+        <form id="quiz-form">
+            <div class="question" data-question="0">
+                <div class="question-number">問題 1 / 5</div>
+                <div class="question-text">コンテキストウィンドウに最適な例えは？</div>
+                <div class="options">
+                    <label class="option" data-value="a">
+                        <span class="option-radio"></span>
+                        <span class="option-text">書類を保管するファイリングキャビネット</span>
+                    </label>
+                    <label class="option" data-value="b">
+                        <span class="option-radio"></span>
+                        <span class="option-text">実際に作業するデスク</span>
+                    </label>
+                    <label class="option" data-value="c">
+                        <span class="option-radio"></span>
+                        <span class="option-text">情報を検索するデータベース</span>
+                    </label>
+                    <label class="option" data-value="d">
+                        <span class="option-radio"></span>
+                        <span class="option-text">長期保存用のバックアップドライブ</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="1">
+                <div class="question-number">問題 2 / 5</div>
+                <div class="question-text">Claude との会話でトークンを消費するのは？</div>
+                <div class="options">
+                    <label class="option" data-value="a">
+                        <span class="option-radio"></span>
+                        <span class="option-text">あなたの入力メッセージのみ</span>
+                    </label>
+                    <label class="option" data-value="b">
+                        <span class="option-radio"></span>
+                        <span class="option-text">あなたの入力と Claude の出力</span>
+                    </label>
+                    <label class="option" data-value="c">
+                        <span class="option-radio"></span>
+                        <span class="option-text">入力、出力、システムプロンプト、会話履歴</span>
+                    </label>
+                    <label class="option" data-value="d">
+                        <span class="option-radio"></span>
+                        <span class="option-text">貼り付けたコードのみ</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="2">
+                <div class="question-number">問題 3 / 5</div>
+                <div class="question-text">長いコンテキストで Claude が最も注意を払わない場所は？</div>
+                <div class="options">
+                    <label class="option" data-value="a">
+                        <span class="option-radio"></span>
+                        <span class="option-text">最初</span>
+                    </label>
+                    <label class="option" data-value="b">
+                        <span class="option-radio"></span>
+                        <span class="option-text">中間</span>
+                    </label>
+                    <label class="option" data-value="c">
+                        <span class="option-radio"></span>
+                        <span class="option-text">最後</span>
+                    </label>
+                    <label class="option" data-value="d">
+                        <span class="option-radio"></span>
+                        <span class="option-text">注意は均等に分散される</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="3">
+                <div class="question-number">問題 4 / 5</div>
+                <div class="question-text">コンテキストを設計するとき、問うべきは：</div>
+                <div class="options">
+                    <label class="option" data-value="a">
+                        <span class="option-radio"></span>
+                        <span class="option-text">「コンテキストウィンドウに何を入れられるか？」</span>
+                    </label>
+                    <label class="option" data-value="b">
+                        <span class="option-radio"></span>
+                        <span class="option-text">「この特定のタスクに Claude が必要とするものは何か？」</span>
+                    </label>
+                    <label class="option" data-value="c">
+                        <span class="option-radio"></span>
+                        <span class="option-text">「関連するすべてのコードをどう含めるか？」</span>
+                    </label>
+                    <label class="option" data-value="d">
+                        <span class="option-radio"></span>
+                        <span class="option-text">「いつか役立つかもしれないものは？」</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="question" data-question="4">
+                <div class="question-number">問題 5 / 5</div>
+                <div class="question-text">Claude の出力が不完全なとき、推奨されるアプローチは？</div>
+                <div class="options">
+                    <label class="option" data-value="a">
+                        <span class="option-radio"></span>
+                        <span class="option-text">コードベース全体を貼り付ける</span>
+                    </label>
+                    <label class="option" data-value="b">
+                        <span class="option-radio"></span>
+                        <span class="option-text">結果が改善するまでコンテキストを段階的に追加</span>
+                    </label>
+                    <label class="option" data-value="c">
+                        <span class="option-radio"></span>
+                        <span class="option-text">別の AI モデルを使う</span>
+                    </label>
+                    <label class="option" data-value="d">
+                        <span class="option-radio"></span>
+                        <span class="option-text">同じプロンプトを何度も繰り返す</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="quiz-actions">
+                <button type="button" id="submit-btn" class="btn btn-primary" disabled>回答を確認</button>
+            </div>
+        </form>
+
+        <div class="quiz-results" id="quiz-results">
+            <div class="results-score" id="score-display">0/5</div>
+            <div class="results-text" id="results-text">上の問題を確認して、正解を見てください。</div>
+            <div class="results-actions">
+                <button type="button" class="btn btn-secondary" onclick="resetQuiz()">もう一度</button>
+                <a href="../practical/1.html" class="btn btn-primary">実践へ進む →</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Created by <a href="https://x-hack.jp">X-HACK Inc.</a> | MIT License</p>
+        <div class="footer-links">
+            <a href="https://github.com/planstack-ai/planstack">GitHub</a>
+            <a href="../">学ぶ</a>
+            <a href="../../../articles/">Blog</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const correctAnswers = ['b', 'c', 'b', 'b', 'b'];
+    let userAnswers = [null, null, null, null, null];
+    let submitted = false;
+
+    document.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', function() {
+            if (submitted) return;
+
+            const question = this.closest('.question');
+            const questionIndex = parseInt(question.dataset.question);
+            const value = this.dataset.value;
+
+            // Deselect all options in this question
+            question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+
+            // Select this option
+            this.classList.add('selected');
+            userAnswers[questionIndex] = value;
+
+            // Enable submit button if all questions answered
+            const allAnswered = userAnswers.every(a => a !== null);
+            document.getElementById('submit-btn').disabled = !allAnswered;
+        });
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function() {
+        if (submitted) return;
+        submitted = true;
+
+        let score = 0;
+
+        document.querySelectorAll('.question').forEach((question, index) => {
+            const options = question.querySelectorAll('.option');
+            options.forEach(option => {
+                option.classList.add('disabled');
+                const value = option.dataset.value;
+
+                if (value === correctAnswers[index]) {
+                    option.classList.add('correct');
+                    if (userAnswers[index] === value) {
+                        score++;
+                    }
+                } else if (userAnswers[index] === value) {
+                    option.classList.add('incorrect');
+                }
+            });
+        });
+
+        document.getElementById('score-display').textContent = `${score}/5`;
+
+        let message = '';
+        if (score === 5) {
+            message = '完璧！基礎をマスターしました。';
+        } else if (score >= 3) {
+            message = '良い結果です！続ける前に間違えた問題を復習しましょう。';
+        } else {
+            message = '続ける前にレッスンの復習をお勧めします。';
+        }
+        document.getElementById('results-text').textContent = message;
+
+        document.getElementById('quiz-results').classList.add('show');
+        this.style.display = 'none';
+    });
+
+    function resetQuiz() {
+        submitted = false;
+        userAnswers = [null, null, null, null, null];
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+        });
+
+        document.getElementById('quiz-results').classList.remove('show');
+        document.getElementById('submit-btn').style.display = 'inline-flex';
+        document.getElementById('submit-btn').disabled = true;
+    }
+</script>
+</body>
+</html>
