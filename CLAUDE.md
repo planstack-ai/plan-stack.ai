@@ -15,4 +15,19 @@ Before making changes:
 ## Structure
 
 - `index.html` - Landing page
+- `articles/` - Blog posts
+- `learn/` - Claude Code tutorials
+  - `basics/` - 5 lessons + quiz
+  - `practical/` - 7 lessons + quiz
 - `docs/plans/` - Implementation plans
+- `.github/` - GitHub Actions workflows
+
+## Learn Content Philosophy
+
+Articles under `learn/` follow context-window thinking applied to writing:
+
+- Each article: 1–2 minutes reading time
+- Density over volume
+- No padding for authority
+
+We respect reader attention the same way we respect token limits.
