@@ -16,9 +16,11 @@ Before making changes:
 
 - `index.html` - Landing page
 - `articles/` - Blog posts
-- `learn/` - Claude Code tutorials
+- `learn/` - Claude Code tutorials (English)
   - `basics/` - 5 lessons + quiz
   - `practical/` - 7 lessons + quiz
+- `ja/` - Japanese content
+  - `learn/` - Claude Code tutorials (Japanese)
 - `docs/plans/` - Implementation plans
 - `.github/` - GitHub Actions workflows
 

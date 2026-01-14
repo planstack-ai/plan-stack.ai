@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Claude Code - Plan Stack</title>
-    <meta name="description" content="Master Claude Code with our structured learning path. From context window basics to advanced workflows.">
-    <meta property="og:title" content="Learn Claude Code - Plan Stack">
-    <meta property="og:description" content="Master Claude Code with our structured learning path. From context window basics to advanced workflows.">
+    <title>Claude Code を学ぶ - Plan Stack</title>
+    <meta name="description" content="Claude Code の体系的な学習パス。コンテキストウィンドウの基礎から実践的なワークフローまで。">
+    <meta property="og:title" content="Claude Code を学ぶ - Plan Stack">
+    <meta property="og:description" content="Claude Code の体系的な学習パス。コンテキストウィンドウの基礎から実践的なワークフローまで。">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://plan-stack.ai/learn">
+    <meta property="og:url" content="https://plan-stack.ai/ja/learn">
     <link rel="alternate" hreflang="en" href="https://plan-stack.ai/learn">
     <link rel="alternate" hreflang="ja" href="https://plan-stack.ai/ja/learn">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+JP:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-primary: #0a0a0b;
@@ -34,7 +34,7 @@
         }
 
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Noto Sans JP', 'Space Grotesk', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.6;
@@ -185,6 +185,69 @@
 
         .intro-content strong {
             color: var(--text-primary);
+        }
+
+        /* Philosophy Section */
+        .philosophy-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .philosophy-content {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .philosophy-content h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .philosophy-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .philosophy-content .note {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+
+        .philosophy-content ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .philosophy-content ul li {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            padding: 4px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .philosophy-content ul li::before {
+            content: "–";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .philosophy-content .closing {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .philosophy-content .closing p {
+            margin-bottom: 4px;
         }
 
         /* Courses Grid */
@@ -338,75 +401,12 @@
             display: flex;
             gap: 24px;
         }
-
-        /* Philosophy Section */
-        .philosophy-section {
-            padding: 60px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .philosophy-content {
-            max-width: 640px;
-            margin: 0 auto;
-        }
-
-        .philosophy-content h2 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            color: var(--text-primary);
-        }
-
-        .philosophy-content p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .philosophy-content .note {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            opacity: 0.8;
-            margin-bottom: 16px;
-        }
-
-        .philosophy-content ul {
-            list-style: none;
-            margin: 16px 0;
-        }
-
-        .philosophy-content ul li {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            padding: 4px 0;
-            padding-left: 16px;
-            position: relative;
-        }
-
-        .philosophy-content ul li::before {
-            content: "–";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .philosophy-content .closing {
-            margin-top: 24px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            font-size: 0.95rem;
-        }
-
-        .philosophy-content .closing p {
-            margin-bottom: 4px;
-        }
     </style>
 </head>
 <body>
 <header>
     <div class="container">
-        <a href="../" class="logo">
+        <a href="../../" class="logo">
             <div class="logo-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M4 6h16M4 12h16M4 18h10" stroke="#000"/>
@@ -416,9 +416,9 @@
         </a>
         <nav class="nav-links">
             <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Docs</a>
-            <a href="./" class="active">Learn</a>
-            <a href="../articles/">Blog</a>
-            <a href="../ja/learn/" class="lang-switch">JA</a>
+            <a href="./" class="active">学ぶ</a>
+            <a href="../../articles/">Blog</a>
+            <a href="../../learn/" class="lang-switch">EN</a>
             <a href="https://github.com/planstack-ai/planstack" class="btn btn-secondary">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -432,10 +432,10 @@
 <main>
     <section class="page-header">
         <div class="container">
-            <p class="section-label">Learn Claude Code</p>
-            <h1 class="page-title">Master Claude Code</h1>
+            <p class="section-label">Claude Code を学ぶ</p>
+            <h1 class="page-title">Claude Code をマスターする</h1>
             <p class="page-description">
-                A structured learning path from understanding context windows to building automated systems. Each lesson takes 1-2 minutes.
+                コンテキストウィンドウの理解から自動化システムの構築まで、体系的な学習パス。各レッスンは1〜2分で読めます。
             </p>
         </div>
     </section>
@@ -444,14 +444,14 @@
         <div class="container">
             <div class="intro-content">
                 <p>
-                    Most people use Claude Code like a magic box: throw code in, hope for good output.
-                    <strong>That approach hits a wall fast.</strong>
+                    多くの人は Claude Code を魔法の箱のように使います。コードを投げ入れて、良い結果が出ることを祈る。
+                    <strong>そのアプローチはすぐに壁にぶつかります。</strong>
                 </p>
                 <p>
-                    The difference between frustrating sessions and productive ones isn't the model—it's understanding how to work with it. Context windows, token limits, prompting strategies—these aren't advanced topics. They're the basics that nobody teaches.
+                    イライラするセッションと生産的なセッションの違いは、モデルではありません。それは Claude との働き方を理解しているかどうかです。コンテキストウィンドウ、トークン制限、プロンプト戦略—これらは上級者向けのトピックではありません。誰も教えてくれない基本です。
                 </p>
                 <p>
-                    This series covers what you need to know, in order. Start with <strong>Basics</strong> to understand the fundamentals, then move to <strong>Practical</strong> for real-world techniques.
+                    このシリーズでは、知るべきことを順番にカバーします。まず<strong>基礎</strong>で基本を理解し、次に<strong>実践</strong>で現実世界のテクニックへ進みましょう。
                 </p>
             </div>
         </div>
@@ -460,40 +460,40 @@
     <section class="philosophy-section">
         <div class="container">
             <div class="philosophy-content">
-                <h2>Why This Series Is Short</h2>
+                <h2>なぜこのシリーズは短いのか</h2>
                 <p>
-                    Long articles feel authoritative.<br>
-                    That's a mental shortcut: length = depth = value.
+                    長い記事は権威があるように感じられます。<br>
+                    それは思考のショートカット：長さ = 深さ = 価値。
                 </p>
                 <p class="note">
-                    (This is called Effort Heuristic and Authority Bias—we tend to trust things that look like they took more work.)
+                    （これは「努力ヒューリスティック」や「権威バイアス」と呼ばれます—私たちはより多くの労力がかかったように見えるものを信頼しがちです。）
                 </p>
                 <p>
-                    Content farms know this. SEO rewards it.<br>
-                    But it's a trick, not quality.
+                    コンテンツファームはこれを知っています。SEO はそれを報酬してきました。<br>
+                    しかしそれはトリックであり、品質ではありません。
                 </p>
                 <p>
-                    If you use LLMs, this probably sounds familiar:
+                    LLM を使っているなら、これは聞き覚えがあるはずです：
                 </p>
                 <ul>
-                    <li>Attention is limited (context windows exist)</li>
-                    <li>More input ≠ better output</li>
-                    <li>Passing only what's needed usually wins</li>
+                    <li>注意力には限界がある（コンテキストウィンドウが存在する）</li>
+                    <li>入力が多い ≠ 出力が良い</li>
+                    <li>必要なものだけを渡すのが通常は最善</li>
                 </ul>
                 <p>
-                    Same goes for readers.
+                    読者にも同じことが言えます。
                 </p>
                 <p>
-                    So we applied context-window thinking to writing:
+                    だから私たちはコンテキストウィンドウ的思考を文章に適用しました：
                 </p>
                 <ul>
-                    <li>Each article: 1–2 min</li>
-                    <li>Total: under 30 min</li>
-                    <li>Density over volume</li>
+                    <li>各記事：1〜2分</li>
+                    <li>合計：30分以内</li>
+                    <li>量より密度</li>
                 </ul>
                 <div class="closing">
-                    <p>We don't pad for authority.</p>
-                    <p>We respect your attention.</p>
+                    <p>権威のために水増ししません。</p>
+                    <p>あなたの注意を尊重します。</p>
                 </div>
             </div>
         </div>
@@ -503,17 +503,17 @@
         <div class="container">
             <div class="courses-grid">
                 <a href="./basics/1.html" class="course-card">
-                    <span class="course-badge">START HERE</span>
-                    <h2 class="course-title">Basics</h2>
+                    <span class="course-badge">ここから始める</span>
+                    <h2 class="course-title">基礎</h2>
                     <p class="course-description">
-                        Understand how Claude Code actually works. Context windows, tokens, and why longer doesn't mean better.
+                        Claude Code が実際にどう動くかを理解する。コンテキストウィンドウ、トークン、そしてなぜ長ければ良いわけではないのか。
                     </p>
                     <ul class="topics-list">
-                        <li>What is Context Window</li>
-                        <li>What Consumes Tokens</li>
-                        <li>Why Accuracy Drops with Length</li>
-                        <li>Context Design Principles</li>
-                        <li>Practical Workflow</li>
+                        <li>コンテキストウィンドウとは</li>
+                        <li>トークンは何に使われるか</li>
+                        <li>なぜ長くなると精度が下がるのか</li>
+                        <li>コンテキスト設計の原則</li>
+                        <li>実践的なワークフロー</li>
                     </ul>
                     <div class="course-meta">
                         <div class="course-stats">
@@ -522,13 +522,13 @@
                                     <path d="M12 6v6l4 2"/>
                                     <circle cx="12" cy="12" r="10"/>
                                 </svg>
-                                ~10 min
+                                約10分
                             </span>
                             <span class="course-stat">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                                 </svg>
-                                5 lessons + quiz
+                                5レッスン + クイズ
                             </span>
                         </div>
                         <span class="course-arrow">→</span>
@@ -536,19 +536,19 @@
                 </a>
 
                 <a href="./practical/1.html" class="course-card">
-                    <span class="course-badge">LEVEL UP</span>
-                    <h2 class="course-title">Practical</h2>
+                    <span class="course-badge">レベルアップ</span>
+                    <h2 class="course-title">実践</h2>
                     <p class="course-description">
-                        Real-world techniques that work. From planning to prompting to building automated systems.
+                        実際に機能するテクニック。計画からプロンプト、自動化システムの構築まで。
                     </p>
                     <ul class="topics-list">
-                        <li>Think First</li>
+                        <li>まず考える</li>
                         <li>CLAUDE.md</li>
-                        <li>Context Window Limits</li>
-                        <li>Prompting That Works</li>
-                        <li>MCP, Hooks, and Tools</li>
-                        <li>When Claude Gets Stuck</li>
-                        <li>Build Systems, Not One-Shots</li>
+                        <li>コンテキストウィンドウの限界</li>
+                        <li>効くプロンプト</li>
+                        <li>MCP、フック、ツール</li>
+                        <li>Claude が詰まったとき</li>
+                        <li>ワンショットではなくシステムを作る</li>
                     </ul>
                     <div class="course-meta">
                         <div class="course-stats">
@@ -557,13 +557,13 @@
                                     <path d="M12 6v6l4 2"/>
                                     <circle cx="12" cy="12" r="10"/>
                                 </svg>
-                                ~15 min
+                                約15分
                             </span>
                             <span class="course-stat">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                                 </svg>
-                                7 lessons + quiz
+                                7レッスン + クイズ
                             </span>
                         </div>
                         <span class="course-arrow">→</span>
@@ -579,8 +579,8 @@
         <p>Created by <a href="https://x-hack.jp">X-HACK Inc.</a> | MIT License</p>
         <div class="footer-links">
             <a href="https://github.com/planstack-ai/planstack">GitHub</a>
-            <a href="./">Learn</a>
-            <a href="../articles/">Blog</a>
+            <a href="./">学ぶ</a>
+            <a href="../../articles/">Blog</a>
             <a href="https://github.com/planstack-ai/planstack/blob/main/docs/getting-started.md">Documentation</a>
         </div>
     </div>
