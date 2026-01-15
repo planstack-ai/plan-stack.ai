@@ -8,67 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg-primary: #0a0a0b; --bg-secondary: #111113; --bg-tertiary: #1a1a1d; --text-primary: #fafafa; --text-secondary: #a1a1aa; --accent: #22c55e; --accent-dim: #16a34a; --border: #27272a; --warning: #f59e0b; --red: #ef4444; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Space Grotesk', sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        header { padding: 24px 0; border-bottom: 1px solid var(--border); }
-        header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 700; font-size: 1.25rem; color: var(--text-primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 6px; display: flex; align-items: center; justify-content: center; }
-        .logo-icon svg { width: 20px; height: 20px; }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text-primary); }
-        .nav-links a.active { color: var(--text-primary); }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
-        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: var(--border); }
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:hover { background: var(--accent-dim); }
-        .btn-primary:disabled { background: var(--border); color: var(--text-secondary); cursor: not-allowed; }
-
-        .quiz-container { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
-        .quiz-header { text-align: center; margin-bottom: 48px; }
-        .quiz-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--warning); background: rgba(245, 158, 11, 0.1); padding: 6px 12px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 16px; }
-        .quiz-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; margin-bottom: 12px; }
-        .quiz-subtitle { color: var(--text-secondary); font-size: 1.05rem; }
-
-        .question { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 24px; }
-        .question-number { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--warning); margin-bottom: 12px; }
-        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; line-height: 1.5; }
-        .options { display: flex; flex-direction: column; gap: 12px; }
-        .option { display: flex; align-items: center; gap: 12px; padding: 16px; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-        .option:hover { border-color: var(--text-secondary); }
-        .option.selected { border-color: var(--accent); background: rgba(34, 197, 94, 0.1); }
-        .option.correct { border-color: var(--accent); background: rgba(34, 197, 94, 0.2); }
-        .option.incorrect { border-color: var(--red); background: rgba(239, 68, 68, 0.1); }
-        .option.disabled { pointer-events: none; }
-        .option-radio { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        .option.selected .option-radio { border-color: var(--accent); }
-        .option.selected .option-radio::after { content: ''; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
-        .option.correct .option-radio { border-color: var(--accent); }
-        .option.correct .option-radio::after { content: '\2713'; color: var(--accent); font-size: 12px; font-weight: bold; }
-        .option.incorrect .option-radio { border-color: var(--red); }
-        .option.incorrect .option-radio::after { content: '\2717'; color: var(--red); font-size: 12px; font-weight: bold; }
-        .option-text { color: var(--text-secondary); font-size: 0.95rem; }
-        .option.selected .option-text { color: var(--text-primary); }
-
-        .quiz-actions { display: flex; justify-content: center; margin-top: 32px; }
-        .quiz-results { text-align: center; padding: 32px; background: var(--bg-secondary); border: 1px solid var(--border); border-radius: 12px; margin-top: 32px; display: none; }
-        .quiz-results.show { display: block; }
-        .results-score { font-size: 3rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-        .results-text { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 24px; }
-        .results-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-        footer { padding: 40px 0; border-top: 1px solid var(--border); }
-        footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        footer p { color: var(--text-secondary); font-size: 0.9rem; }
-        footer a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
-        footer a:hover { color: var(--text-primary); }
-        .footer-links { display: flex; gap: 24px; }
-    </style>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="../styles/quiz.css">
 </head>
 <body>
 <header>
